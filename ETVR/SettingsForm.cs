@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Windows.Forms;
+using ETVR.Properties;
+
+namespace ETVR
+{
+    public partial class SettingsForm : Form
+    {
+        public SettingsForm()
+        {
+            InitializeComponent();
+        }
+
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            this.boxL.Text = Settings.Default["urlL"].ToString();
+            this.boxR.Text = Settings.Default["urlR"].ToString();
+            this.checkBox1.Checked = Settings.Default["Verbose"].Equals(true);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked == true)
+            {
+                Settings.Default["Verbose"] = true;
+            }
+            else
+            {
+                Settings.Default["Verbose"] = false;
+            }
+            Settings.Default.Save();
+        }
+
+        private void btnset_Click(object sender, EventArgs e)
+        {
+            Settings.Default["urlL"] = boxL.Text;
+            Settings.Default["urlR"] = boxR.Text;
+            Settings.Default.Save();
+            Console.WriteLine("Saved addresses: ", Settings.Default["urlL"].ToString(), Settings.Default["urlR"].ToString());
+        }
+    }
+}
