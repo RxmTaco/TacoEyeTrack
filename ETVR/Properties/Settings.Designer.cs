@@ -58,5 +58,29 @@ namespace ETVR.Properties {
                 this["Verbose"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
+        public float sliderL {
+            get {
+                return ((float)(this["sliderL"]));
+            }
+            set {
+                this["sliderL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.3")]
+        public float sliderR {
+            get {
+                return ((float)(this["sliderR"]));
+            }
+            set {
+                this["sliderR"] = value;
+            }
+        }
     }
 }

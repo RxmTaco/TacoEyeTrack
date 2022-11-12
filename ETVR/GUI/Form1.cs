@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -76,6 +77,12 @@ namespace ETVR
         private void btnclose_Click(object sender, EventArgs e)
         {
             //Application exit
+            TrackingForm form = new TrackingForm();
+            CroppingForm form1 = new CroppingForm();
+            form1.videoStop();
+
+            Thread.Sleep(500);
+
             Application.Exit();
         }
 
