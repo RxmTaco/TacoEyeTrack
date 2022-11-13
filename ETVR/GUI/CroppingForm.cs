@@ -8,13 +8,16 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace ETVR
 {
     public partial class CroppingForm : Form
     {
+
         Stream s = new Stream();
 
         public CroppingForm()
@@ -27,19 +30,18 @@ namespace ETVR
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Source video
-            pictureBox1.Image = s.bmp;
+            //pictureBox1.Image = s.bmp;
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Source video
-            pictureBox2.Image = s.bmp2;
+            //pictureBox2.Image = s.bmp2;
         }
 
 
         private void CroppingForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

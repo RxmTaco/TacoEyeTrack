@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
+using AForge.Video;
 using ETVR.Properties;
 
 namespace ETVR
@@ -23,9 +27,11 @@ namespace ETVR
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new EyeTrackVR());
 
+            /*
             Stream s = new Stream();
-            Thread backgroundThread = new Thread(new ThreadStart(Stream));
+            Thread backgroundThread = new Thread(new ThreadStart(s));
             backgroundThread.Start();
+            */
         }
     }
 }

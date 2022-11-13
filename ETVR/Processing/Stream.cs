@@ -23,13 +23,29 @@ namespace ETVR
 {
     public partial class Stream
     {
+        
         public Bitmap bmp { get; set; }
         public Bitmap bmp2 { get; set; }
 
         MJPEGStream stream1;
         MJPEGStream stream2;
+        
 
         public Stream()
+        {
+            stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
+
+            stream1.NewFrame += playerControl1_NewFrame;
+
+
+            stream2 = new MJPEGStream(Settings.Default["urlR"].ToString());
+
+            stream2.NewFrame += playerControl2_NewFrame;
+
+            stream1.Start();
+            stream2.Start();
+        }
+        public void getStream()
         {
             stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
 
@@ -48,14 +64,12 @@ namespace ETVR
         {
             //Source video
             bmp = (Bitmap)eventArgs.Frame.Clone();
-            bmp.Dispose();
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Source video
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
-            bmp2.Dispose();
         }
 
         public void videoStop()

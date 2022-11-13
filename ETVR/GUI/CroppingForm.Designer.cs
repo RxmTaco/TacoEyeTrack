@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CroppingForm));
             this.pictureBox2 = new AForge.Controls.PictureBox();
             this.pictureBox1 = new AForge.Controls.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -36,6 +37,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
             this.pictureBox2.Image = null;
             this.pictureBox2.Location = new System.Drawing.Point(398, 12);
             this.pictureBox2.Name = "pictureBox2";
@@ -46,6 +48,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = null;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
