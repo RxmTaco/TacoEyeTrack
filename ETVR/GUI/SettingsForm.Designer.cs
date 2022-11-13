@@ -94,10 +94,10 @@
             this.btnset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnset.Location = new System.Drawing.Point(187, 46);
             this.btnset.Name = "btnset";
-            this.btnset.Size = new System.Drawing.Size(75, 23);
+            this.btnset.Size = new System.Drawing.Size(64, 23);
             this.btnset.TabIndex = 9;
             this.btnset.Tag = "";
-            this.btnset.Text = "Set";
+            this.btnset.Text = "Save";
             this.btnset.UseVisualStyleBackColor = false;
             this.btnset.Click += new System.EventHandler(this.btnset_Click);
             // 

@@ -25,7 +25,7 @@ namespace ETVR
     public partial class TrackingForm : Form
     {
         Saturate form = new Saturate();
-        CroppingForm form1 = new CroppingForm();
+        Stream form1 = new Stream();
 
         public TrackingForm()
         {

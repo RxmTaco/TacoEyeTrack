@@ -15,7 +15,8 @@ namespace ETVR
 {
     public partial class EyeTrackVR : Form
     {
-      
+            
+
         public EyeTrackVR()
         {
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace ETVR
 
         public void loadform(object Form)
         {
-            if(this.MainPanel.Controls.Count > 0)
+            if (this.MainPanel.Controls.Count > 0)
                 this.MainPanel.Controls.RemoveAt(0);
             Form f = Form as Form;
             f.TopLevel = false;
@@ -78,11 +79,11 @@ namespace ETVR
         {
             //Application exit
             TrackingForm form = new TrackingForm();
-            CroppingForm form1 = new CroppingForm();
+            Stream form1 = new Stream();
             form1.videoStop();
 
-            Thread.Sleep(500);
-
+            Application.ExitThread();
+            Thread.Sleep(100);
             Application.Exit();
         }
 
