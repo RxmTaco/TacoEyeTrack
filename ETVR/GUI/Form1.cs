@@ -78,9 +78,6 @@ namespace ETVR
         private void btnclose_Click(object sender, EventArgs e)
         {
             //Application exit
-            TrackingForm form = new TrackingForm();
-            Stream form1 = new Stream();
-            form1.videoStop();
 
             Application.ExitThread();
             Thread.Sleep(100);

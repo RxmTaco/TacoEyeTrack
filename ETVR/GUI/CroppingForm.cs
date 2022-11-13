@@ -18,25 +18,39 @@ namespace ETVR
     public partial class CroppingForm : Form
     {
 
-        Stream s = new Stream();
+        public Bitmap bmp { get; set; }
+        public Bitmap bmp2 { get; set; }
+
+        MJPEGStream stream1;
+        MJPEGStream stream2;
 
         public CroppingForm()
         {
             InitializeComponent();
-            pictureBox1.Image = s.bmp;
-            pictureBox2.Image = s.bmp2;
+
+            stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
+
+            stream1.NewFrame += playerControl1_NewFrame;
+
+
+            stream2 = new MJPEGStream(Settings.Default["urlR"].ToString());
+
+            stream2.NewFrame += playerControl2_NewFrame;
+
+            stream1.Start();
+            stream2.Start();
         }
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Source video
-            //pictureBox1.Image = s.bmp;
+            bmp = (Bitmap)eventArgs.Frame.Clone();
+            pictureBox1.Image = bmp;
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Source video
-            //pictureBox2.Image = s.bmp2;
+            bmp2 = (Bitmap)eventArgs.Frame.Clone();
+            pictureBox2.Image = bmp2;
         }
 
 
