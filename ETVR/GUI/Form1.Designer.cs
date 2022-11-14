@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EyeTrackVR));
             this.MainPanel = new System.Windows.Forms.Panel();
             this.HeaderPanel = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnhide = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
             this.btncropping = new System.Windows.Forms.Button();
             this.btntracking = new System.Windows.Forms.Button();
             this.btnsettings = new System.Windows.Forms.Button();
             this.HeaderPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // MainPanel
             // 
             this.MainPanel.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
+            this.MainPanel.BackColor = System.Drawing.Color.Black;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MainPanel.Location = new System.Drawing.Point(0, 37);
             this.MainPanel.Name = "MainPanel";
@@ -52,10 +52,11 @@
             // 
             // HeaderPanel
             // 
-            this.HeaderPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.HeaderPanel.Controls.Add(this.pictureBox1);
-            this.HeaderPanel.Controls.Add(this.btnhide);
+            this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
+            this.HeaderPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HeaderPanel.BackgroundImage")));
+            this.HeaderPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.HeaderPanel.Controls.Add(this.btnclose);
+            this.HeaderPanel.Controls.Add(this.btnhide);
             this.HeaderPanel.Controls.Add(this.btncropping);
             this.HeaderPanel.Controls.Add(this.btntracking);
             this.HeaderPanel.Controls.Add(this.btnsettings);
@@ -68,26 +69,18 @@
             this.HeaderPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeaderPanel_MouseDown);
             this.HeaderPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HeaderPanel_MouseMove);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ETVR.Properties.Resources.Eyes;
-            this.pictureBox1.Location = new System.Drawing.Point(812, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(38, 37);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnhide
             // 
             this.btnhide.BackColor = System.Drawing.Color.Black;
+            this.btnhide.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnhide.BackgroundImage")));
+            this.btnhide.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnhide.FlatAppearance.BorderSize = 0;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnhide.ForeColor = System.Drawing.Color.White;
-            this.btnhide.Location = new System.Drawing.Point(853, 0);
+            this.btnhide.Location = new System.Drawing.Point(854, 0);
             this.btnhide.Margin = new System.Windows.Forms.Padding(0);
             this.btnhide.Name = "btnhide";
-            this.btnhide.Size = new System.Drawing.Size(40, 37);
+            this.btnhide.Size = new System.Drawing.Size(39, 37);
             this.btnhide.TabIndex = 4;
             this.btnhide.Text = "-";
             this.btnhide.UseVisualStyleBackColor = false;
@@ -110,9 +103,10 @@
             // 
             // btncropping
             // 
-            this.btncropping.BackColor = System.Drawing.Color.Gray;
+            this.btncropping.BackColor = System.Drawing.Color.Purple;
             this.btncropping.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
             this.btncropping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btncropping.ForeColor = System.Drawing.SystemColors.Control;
             this.btncropping.Location = new System.Drawing.Point(224, 5);
             this.btncropping.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.btncropping.Name = "btncropping";
@@ -124,9 +118,10 @@
             // 
             // btntracking
             // 
-            this.btntracking.BackColor = System.Drawing.Color.Gray;
+            this.btntracking.BackColor = System.Drawing.Color.Purple;
             this.btntracking.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
             this.btntracking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btntracking.ForeColor = System.Drawing.SystemColors.Control;
             this.btntracking.Location = new System.Drawing.Point(118, 5);
             this.btntracking.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.btntracking.Name = "btntracking";
@@ -138,9 +133,10 @@
             // 
             // btnsettings
             // 
-            this.btnsettings.BackColor = System.Drawing.Color.Gray;
+            this.btnsettings.BackColor = System.Drawing.Color.Purple;
             this.btnsettings.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
             this.btnsettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsettings.ForeColor = System.Drawing.SystemColors.Control;
             this.btnsettings.Location = new System.Drawing.Point(12, 6);
             this.btnsettings.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.btnsettings.Name = "btnsettings";
@@ -165,7 +161,6 @@
             this.Text = "EyeTrackVR";
             this.Load += new System.EventHandler(this.EyeTrackVR_Load);
             this.HeaderPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -178,7 +173,6 @@
         private System.Windows.Forms.Button btnsettings;
         private System.Windows.Forms.Button btnhide;
         private System.Windows.Forms.Button btnclose;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

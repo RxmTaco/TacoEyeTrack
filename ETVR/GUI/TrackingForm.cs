@@ -115,18 +115,20 @@ namespace ETVR
             AdditiveNoise filter = new AdditiveNoise(generator);
             filter.ApplyInPlace(grayImage);
             */
-
-            int rounded = (int)Math.Round((sliderR.ManipulatorPosition + 1) * 250, 0);
+            
+            //Thresholding
+            int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
+            //Preview image
             pictureBox3.Image = new Bitmap(grayImage);
 
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
             filter.CoupledSizeFiltering = true;
-            filter.MinWidth = (int)(WidthR.ManipulatorPosition + 1) * 100;
-            filter.MinHeight = (int)(HeightR.ManipulatorPosition + 1) * 100;
+            filter.MinWidth = (int)(WidthL.ManipulatorPosition + 1) * 100;
+            filter.MinHeight = (int)(HeightL.ManipulatorPosition + 1) * 100;
             filter.ApplyInPlace(grayImage);
 
             /* BLOB DETECTION *****************************************************************************/
@@ -228,10 +230,12 @@ namespace ETVR
             filter.ApplyInPlace(grayImage);
             */
 
+            //Thresholding
             int rounded = (int)Math.Round((sliderR.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
+            //Preview image
             pictureBox4.Image = new Bitmap(grayImage);
 
             //*Blob size filtering

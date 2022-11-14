@@ -70,6 +70,7 @@
             // urlL
             // 
             this.urlL.AutoSize = true;
+            this.urlL.ForeColor = System.Drawing.SystemColors.Control;
             this.urlL.Location = new System.Drawing.Point(12, 54);
             this.urlL.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlL.Name = "urlL";
@@ -80,6 +81,7 @@
             // urlR
             // 
             this.urlR.AutoSize = true;
+            this.urlR.ForeColor = System.Drawing.SystemColors.Control;
             this.urlR.Location = new System.Drawing.Point(401, 54);
             this.urlR.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlR.Name = "urlR";
@@ -136,6 +138,7 @@
             // sliderValL
             // 
             this.sliderValL.AutoSize = true;
+            this.sliderValL.ForeColor = System.Drawing.SystemColors.Control;
             this.sliderValL.Location = new System.Drawing.Point(333, 70);
             this.sliderValL.Name = "sliderValL";
             this.sliderValL.Size = new System.Drawing.Size(45, 13);
@@ -145,6 +148,7 @@
             // sliderValR
             // 
             this.sliderValR.AutoSize = true;
+            this.sliderValR.ForeColor = System.Drawing.SystemColors.Control;
             this.sliderValR.Location = new System.Drawing.Point(725, 70);
             this.sliderValR.Name = "sliderValR";
             this.sliderValR.Size = new System.Drawing.Size(45, 13);
@@ -153,6 +157,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = null;
             this.pictureBox1.Location = new System.Drawing.Point(19, 157);
             this.pictureBox1.Name = "pictureBox1";
@@ -163,6 +168,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = null;
             this.pictureBox2.Location = new System.Drawing.Point(404, 157);
             this.pictureBox2.Name = "pictureBox2";
@@ -173,6 +179,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Image = null;
             this.pictureBox4.Location = new System.Drawing.Point(590, 157);
             this.pictureBox4.Name = "pictureBox4";
@@ -183,6 +190,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Image = null;
             this.pictureBox3.Location = new System.Drawing.Point(205, 157);
             this.pictureBox3.Name = "pictureBox3";
@@ -194,6 +202,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(202, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
@@ -203,6 +212,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(594, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
@@ -212,6 +222,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
             this.label3.Location = new System.Drawing.Point(594, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
@@ -221,6 +232,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
             this.label4.Location = new System.Drawing.Point(202, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
@@ -230,6 +242,7 @@
             // blobWidthR
             // 
             this.blobWidthR.AutoSize = true;
+            this.blobWidthR.ForeColor = System.Drawing.SystemColors.Control;
             this.blobWidthR.Location = new System.Drawing.Point(725, 99);
             this.blobWidthR.Name = "blobWidthR";
             this.blobWidthR.Size = new System.Drawing.Size(45, 13);
@@ -239,6 +252,7 @@
             // blobWidthL
             // 
             this.blobWidthL.AutoSize = true;
+            this.blobWidthL.ForeColor = System.Drawing.SystemColors.Control;
             this.blobWidthL.Location = new System.Drawing.Point(333, 99);
             this.blobWidthL.Name = "blobWidthL";
             this.blobWidthL.Size = new System.Drawing.Size(45, 13);
@@ -278,6 +292,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.Control;
             this.label7.Location = new System.Drawing.Point(594, 128);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
@@ -287,6 +302,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
             this.label8.Location = new System.Drawing.Point(202, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 13);
@@ -296,6 +312,7 @@
             // blobHeightR
             // 
             this.blobHeightR.AutoSize = true;
+            this.blobHeightR.ForeColor = System.Drawing.SystemColors.Control;
             this.blobHeightR.Location = new System.Drawing.Point(725, 128);
             this.blobHeightR.Name = "blobHeightR";
             this.blobHeightR.Size = new System.Drawing.Size(45, 13);
@@ -305,6 +322,7 @@
             // blobHeightL
             // 
             this.blobHeightL.AutoSize = true;
+            this.blobHeightL.ForeColor = System.Drawing.SystemColors.Control;
             this.blobHeightL.Location = new System.Drawing.Point(333, 128);
             this.blobHeightL.Name = "blobHeightL";
             this.blobHeightL.Size = new System.Drawing.Size(45, 13);
@@ -343,6 +361,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Image = null;
             this.pictureBox5.Location = new System.Drawing.Point(590, 343);
             this.pictureBox5.Name = "pictureBox5";
@@ -353,6 +372,7 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Image = null;
             this.pictureBox6.Location = new System.Drawing.Point(205, 343);
             this.pictureBox6.Name = "pictureBox6";
@@ -363,6 +383,7 @@
             // 
             // pictureBox7
             // 
+            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Image = null;
             this.pictureBox7.Location = new System.Drawing.Point(404, 343);
             this.pictureBox7.Name = "pictureBox7";
@@ -373,6 +394,7 @@
             // 
             // pictureBox8
             // 
+            this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Image = null;
             this.pictureBox8.Location = new System.Drawing.Point(19, 343);
             this.pictureBox8.Name = "pictureBox8";
@@ -385,7 +407,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 550);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox6);
