@@ -26,6 +26,8 @@ using AForge.Video;
 using ETVR.Properties;
 using System.Windows.Data;
 using System.Drawing.Imaging;
+using AForge.Math.Random;
+//using Aspose.Imaging;
 
 namespace ETVR
 {
@@ -161,67 +163,110 @@ namespace ETVR
 
         public void playerControl4_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Edited Stream
+            //Stream
             bmp4 = (Bitmap)eventArgs.Frame.Clone();
 
             /* FILTERING *********************************************************************************/
 
-            // create grayscale filter (BT709)
+            //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
-            // apply the filter
             Bitmap grayImage = grayscale.Apply(bmp4);
 
-            //GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
-            //gammaL.ApplyInPlace(grayImage);
+            /*Gamma
+            GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
+            gammaL.ApplyInPlace(grayImage);
+            */
 
+            /*Noise
+            IRandomNumberGenerator generator = new UniformGenerator(new Range(-30, 0));
+            AdditiveNoise filter = new AdditiveNoise(generator);
+            filter.ApplyInPlace(grayImage);
+            */
 
-            int rounded = (int)Math.Round(sliderR.ManipulatorPosition * 250, 0);
+            int rounded = (int)Math.Round((sliderR.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
-
+            //*Blob size filtering
+            BlobsFiltering filter = new BlobsFiltering();
+            filter.CoupledSizeFiltering = true;
+            filter.MinWidth = 70;
+            filter.MinHeight = 70;
+            filter.ApplyInPlace(grayImage);
+            //*/
 
             /* BLOB DETECTION *****************************************************************************/
 
-            /*
 
-            // process image with blob counter
+            /*
+             // process image with blob counter
+             BlobCounter blobCounter = new BlobCounter();
+             blobCounter.ProcessImage(grayImage);
+             Blob[] blobs = blobCounter.GetObjectsInformation();
+
+             // create convex hull searching algorithm
+             GrahamConvexHull hullFinder = new GrahamConvexHull();
+
+             // lock image to draw on it
+             BitmapData data = grayImage.LockBits(
+                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
+                     ImageLockMode.ReadWrite, grayImage.PixelFormat);
+
+
+             // process each blob
+             foreach (Blob blob in blobs)
+             {
+                 List<IntPoint> leftPoints, rightPoints, edgePoints = default;
+
+                 // get blob's edge points
+                 blobCounter.GetBlobsLeftAndRightEdges(blob,
+                 out leftPoints, out rightPoints);
+
+                 edgePoints.AddRange(leftPoints);
+                 edgePoints.AddRange(rightPoints);
+
+                 // blob's convex hull
+                 List<IntPoint> hull = hullFinder.FindHull(edgePoints);
+
+                 Drawing.Polygon(data, hull, Color.Red);
+             }
+
+
+            grayImage.UnlockBits(data);
+            */
+
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(grayImage);
             Blob[] blobs = blobCounter.GetObjectsInformation();
 
-            // create convex hull searching algorithm
-            GrahamConvexHull hullFinder = new GrahamConvexHull();
+            List<IntPoint> leftPoints, rightPoints;
 
-            // lock image to draw on it
             BitmapData data = grayImage.LockBits(
-                new Rectangle(0, 0, grayImage.Width, bmp3.Height),
-                    ImageLockMode.ReadWrite, bmp3.PixelFormat);
+                new Rectangle(0, 0, grayImage.Width, grayImage.Height),
+                ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
-            
-            // process each blob
             foreach (Blob blob in blobs)
             {
-                List <IntPoint> leftPoints, rightPoints, edgePoints = default;
+                blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
+                if (leftPoints.Count > 0 && rightPoints.Count > 0)
+                {
+                    // get blob's edge points
+                    List<IntPoint> edgePoints = new List<IntPoint>();
+                    edgePoints.AddRange(leftPoints);
+                    edgePoints.AddRange(rightPoints);
 
-                // get blob's edge points
-                blobCounter.GetBlobsLeftAndRightEdges(blob,
-                out leftPoints, out rightPoints);
+                    // blob's convex hull
+                    GrahamConvexHull hullFinder = new GrahamConvexHull();
+                    List<IntPoint> hull = hullFinder.FindHull(edgePoints);
 
-                edgePoints.AddRange(leftPoints);
-                edgePoints.AddRange(rightPoints);
-
-                // blob's convex hull
-                List<IntPoint> hull = hullFinder.FindHull(edgePoints);
-
-                Drawing.Polygon(data, hull, Color.Red);
+                    // create graphics and draw the hull
+                    //Graphics g = Graphics.FromImage(grayImage);
+                    Drawing.Polygon(data, hull, Color.Red);
+                    //g.DrawPolygon(new Pen(Color.Red), PointF[]hull);
+                }
             }
-            
 
             grayImage.UnlockBits(data);
-
-            */
-
 
             //post final
             pictureBox4.Image = grayImage;

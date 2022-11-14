@@ -39,6 +39,8 @@
             this.pictureBox2 = new AForge.Controls.PictureBox();
             this.pictureBox4 = new AForge.Controls.PictureBox();
             this.pictureBox3 = new AForge.Controls.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -49,7 +51,7 @@
             // 
             this.urlL.AutoSize = true;
             this.urlL.Location = new System.Drawing.Point(12, 54);
-            this.urlL.MaximumSize = new System.Drawing.Size(130, 20);
+            this.urlL.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlL.Name = "urlL";
             this.urlL.Size = new System.Drawing.Size(25, 13);
             this.urlL.TabIndex = 1;
@@ -59,7 +61,7 @@
             // 
             this.urlR.AutoSize = true;
             this.urlR.Location = new System.Drawing.Point(401, 54);
-            this.urlR.MaximumSize = new System.Drawing.Size(130, 20);
+            this.urlR.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlR.Name = "urlR";
             this.urlR.Size = new System.Drawing.Size(32, 13);
             this.urlR.TabIndex = 2;
@@ -114,7 +116,7 @@
             // sliderValL
             // 
             this.sliderValL.AutoSize = true;
-            this.sliderValL.Location = new System.Drawing.Point(151, 51);
+            this.sliderValL.Location = new System.Drawing.Point(262, 70);
             this.sliderValL.Name = "sliderValL";
             this.sliderValL.Size = new System.Drawing.Size(45, 13);
             this.sliderValL.TabIndex = 8;
@@ -123,7 +125,7 @@
             // sliderValR
             // 
             this.sliderValR.AutoSize = true;
-            this.sliderValR.Location = new System.Drawing.Point(543, 51);
+            this.sliderValR.Location = new System.Drawing.Point(654, 70);
             this.sliderValR.Name = "sliderValR";
             this.sliderValR.Size = new System.Drawing.Size(45, 13);
             this.sliderValR.TabIndex = 9;
@@ -169,12 +171,32 @@
             this.pictureBox3.TabIndex = 12;
             this.pictureBox3.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(202, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Threshold";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(594, 70);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Threshold";
+            // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -211,5 +233,7 @@
         private AForge.Controls.PictureBox pictureBox2;
         private AForge.Controls.PictureBox pictureBox4;
         private AForge.Controls.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
