@@ -82,5 +82,53 @@ namespace ETVR.Properties {
                 this["sliderR"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float blobHeightL {
+            get {
+                return ((float)(this["blobHeightL"]));
+            }
+            set {
+                this["blobHeightL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float blobWidthL {
+            get {
+                return ((float)(this["blobWidthL"]));
+            }
+            set {
+                this["blobWidthL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float blobHeightR {
+            get {
+                return ((float)(this["blobHeightR"]));
+            }
+            set {
+                this["blobHeightR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float blobWidthR {
+            get {
+                return ((float)(this["blobWidthR"]));
+            }
+            set {
+                this["blobWidthR"] = value;
+            }
+        }
     }
 }

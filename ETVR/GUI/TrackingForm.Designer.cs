@@ -41,10 +41,30 @@
             this.pictureBox3 = new AForge.Controls.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.blobWidthR = new System.Windows.Forms.Label();
+            this.blobWidthL = new System.Windows.Forms.Label();
+            this.WidthR = new AForge.Controls.SliderControl();
+            this.WidthL = new AForge.Controls.SliderControl();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.blobHeightR = new System.Windows.Forms.Label();
+            this.blobHeightL = new System.Windows.Forms.Label();
+            this.HeightR = new AForge.Controls.SliderControl();
+            this.HeightL = new AForge.Controls.SliderControl();
+            this.pictureBox5 = new AForge.Controls.PictureBox();
+            this.pictureBox6 = new AForge.Controls.PictureBox();
+            this.pictureBox7 = new AForge.Controls.PictureBox();
+            this.pictureBox8 = new AForge.Controls.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.SuspendLayout();
             // 
             // urlL
@@ -116,7 +136,7 @@
             // sliderValL
             // 
             this.sliderValL.AutoSize = true;
-            this.sliderValL.Location = new System.Drawing.Point(262, 70);
+            this.sliderValL.Location = new System.Drawing.Point(333, 70);
             this.sliderValL.Name = "sliderValL";
             this.sliderValL.Size = new System.Drawing.Size(45, 13);
             this.sliderValL.TabIndex = 8;
@@ -125,7 +145,7 @@
             // sliderValR
             // 
             this.sliderValR.AutoSize = true;
-            this.sliderValR.Location = new System.Drawing.Point(654, 70);
+            this.sliderValR.Location = new System.Drawing.Point(725, 70);
             this.sliderValR.Name = "sliderValR";
             this.sliderValR.Size = new System.Drawing.Size(45, 13);
             this.sliderValR.TabIndex = 9;
@@ -134,7 +154,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = null;
-            this.pictureBox1.Location = new System.Drawing.Point(15, 100);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 157);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(180, 180);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -144,7 +164,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = null;
-            this.pictureBox2.Location = new System.Drawing.Point(404, 99);
+            this.pictureBox2.Location = new System.Drawing.Point(404, 157);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(180, 180);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -154,7 +174,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = null;
-            this.pictureBox4.Location = new System.Drawing.Point(590, 99);
+            this.pictureBox4.Location = new System.Drawing.Point(590, 157);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(180, 180);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -164,7 +184,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = null;
-            this.pictureBox3.Location = new System.Drawing.Point(201, 100);
+            this.pictureBox3.Location = new System.Drawing.Point(205, 157);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(180, 180);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -176,25 +196,213 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(202, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Threshold";
+            this.label1.Text = "Filtering Threshold";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(594, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Threshold";
+            this.label2.Text = "Filtering Threshold";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(594, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Blob Width";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(202, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Blob Width";
+            // 
+            // blobWidthR
+            // 
+            this.blobWidthR.AutoSize = true;
+            this.blobWidthR.Location = new System.Drawing.Point(725, 99);
+            this.blobWidthR.Name = "blobWidthR";
+            this.blobWidthR.Size = new System.Drawing.Size(45, 13);
+            this.blobWidthR.TabIndex = 19;
+            this.blobWidthR.Text = "sliderval";
+            // 
+            // blobWidthL
+            // 
+            this.blobWidthL.AutoSize = true;
+            this.blobWidthL.Location = new System.Drawing.Point(333, 99);
+            this.blobWidthL.Name = "blobWidthL";
+            this.blobWidthL.Size = new System.Drawing.Size(45, 13);
+            this.blobWidthL.TabIndex = 18;
+            this.blobWidthL.Text = "sliderval";
+            // 
+            // WidthR
+            // 
+            this.WidthR.Location = new System.Drawing.Point(404, 99);
+            this.WidthR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.WidthR.ManipulatorPosition = 0F;
+            this.WidthR.Name = "WidthR";
+            this.WidthR.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.WidthR.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.WidthR.ResetPositionOnMouseRelease = false;
+            this.WidthR.Size = new System.Drawing.Size(184, 23);
+            this.WidthR.TabIndex = 17;
+            this.WidthR.Text = "sliderControl2";
+            this.WidthR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WidthR_MouseDown);
+            this.WidthR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WidthR_MouseUp);
+            // 
+            // WidthL
+            // 
+            this.WidthL.Location = new System.Drawing.Point(12, 99);
+            this.WidthL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.WidthL.ManipulatorPosition = 0F;
+            this.WidthL.Name = "WidthL";
+            this.WidthL.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.WidthL.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.WidthL.ResetPositionOnMouseRelease = false;
+            this.WidthL.Size = new System.Drawing.Size(184, 23);
+            this.WidthL.TabIndex = 16;
+            this.WidthL.Text = "sliderControl1";
+            this.WidthL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WidthL_MouseDown);
+            this.WidthL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WidthL_MouseUp);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(594, 128);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(62, 13);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Blob Height";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(202, 128);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Blob Height";
+            // 
+            // blobHeightR
+            // 
+            this.blobHeightR.AutoSize = true;
+            this.blobHeightR.Location = new System.Drawing.Point(725, 128);
+            this.blobHeightR.Name = "blobHeightR";
+            this.blobHeightR.Size = new System.Drawing.Size(45, 13);
+            this.blobHeightR.TabIndex = 25;
+            this.blobHeightR.Text = "sliderval";
+            // 
+            // blobHeightL
+            // 
+            this.blobHeightL.AutoSize = true;
+            this.blobHeightL.Location = new System.Drawing.Point(333, 128);
+            this.blobHeightL.Name = "blobHeightL";
+            this.blobHeightL.Size = new System.Drawing.Size(45, 13);
+            this.blobHeightL.TabIndex = 24;
+            this.blobHeightL.Text = "sliderval";
+            // 
+            // HeightR
+            // 
+            this.HeightR.Location = new System.Drawing.Point(404, 128);
+            this.HeightR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.HeightR.ManipulatorPosition = 0F;
+            this.HeightR.Name = "HeightR";
+            this.HeightR.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.HeightR.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.HeightR.ResetPositionOnMouseRelease = false;
+            this.HeightR.Size = new System.Drawing.Size(184, 23);
+            this.HeightR.TabIndex = 23;
+            this.HeightR.Text = "sliderControl2";
+            this.HeightR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeightR_MouseDown);
+            this.HeightR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HeightR_MouseUp);
+            // 
+            // HeightL
+            // 
+            this.HeightL.Location = new System.Drawing.Point(12, 128);
+            this.HeightL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.HeightL.ManipulatorPosition = 0F;
+            this.HeightL.Name = "HeightL";
+            this.HeightL.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.HeightL.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.HeightL.ResetPositionOnMouseRelease = false;
+            this.HeightL.Size = new System.Drawing.Size(184, 23);
+            this.HeightL.TabIndex = 22;
+            this.HeightL.Text = "sliderControl1";
+            this.HeightL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeightL_MouseDown);
+            this.HeightL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HeightL_MouseUp);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = null;
+            this.pictureBox5.Location = new System.Drawing.Point(590, 343);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 31;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = null;
+            this.pictureBox6.Location = new System.Drawing.Point(205, 343);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 30;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = null;
+            this.pictureBox7.Location = new System.Drawing.Point(404, 343);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 29;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = null;
+            this.pictureBox8.Location = new System.Drawing.Point(19, 343);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 28;
+            this.pictureBox8.TabStop = false;
             // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 550);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.blobHeightR);
+            this.Controls.Add(this.blobHeightL);
+            this.Controls.Add(this.HeightR);
+            this.Controls.Add(this.HeightL);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.blobWidthR);
+            this.Controls.Add(this.blobWidthL);
+            this.Controls.Add(this.WidthR);
+            this.Controls.Add(this.WidthL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox4);
@@ -216,6 +424,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +447,21 @@
         private AForge.Controls.PictureBox pictureBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label blobWidthR;
+        private System.Windows.Forms.Label blobWidthL;
+        private AForge.Controls.SliderControl WidthR;
+        private AForge.Controls.SliderControl WidthL;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label blobHeightR;
+        private System.Windows.Forms.Label blobHeightL;
+        private AForge.Controls.SliderControl HeightR;
+        private AForge.Controls.SliderControl HeightL;
+        private AForge.Controls.PictureBox pictureBox5;
+        private AForge.Controls.PictureBox pictureBox6;
+        private AForge.Controls.PictureBox pictureBox7;
+        private AForge.Controls.PictureBox pictureBox8;
     }
 }

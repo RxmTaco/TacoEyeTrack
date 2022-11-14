@@ -71,7 +71,6 @@ namespace ETVR
             stream4.NewFrame += playerControl4_NewFrame;
 
 
-
             stream1.Start();
             stream2.Start();
             stream3.Start();
@@ -97,6 +96,7 @@ namespace ETVR
         {
             //Edited Stream
             bmp3 = (Bitmap)eventArgs.Frame.Clone();
+            
 
             /* FILTERING *********************************************************************************/
 
@@ -187,13 +187,14 @@ namespace ETVR
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
+            pictureBox4.Image = new Bitmap(grayImage);
+
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
             filter.CoupledSizeFiltering = true;
-            filter.MinWidth = 70;
-            filter.MinHeight = 70;
+            filter.MinWidth = (int)(WidthR.ManipulatorPosition + 1) * 100;
+            filter.MinHeight = (int)(HeightR.ManipulatorPosition + 1) * 100;
             filter.ApplyInPlace(grayImage);
-            //*/
 
             /* BLOB DETECTION *****************************************************************************/
 
@@ -260,16 +261,15 @@ namespace ETVR
                     List<IntPoint> hull = hullFinder.FindHull(edgePoints);
 
                     // create graphics and draw the hull
-                    //Graphics g = Graphics.FromImage(grayImage);
-                    Drawing.Polygon(data, hull, Color.Red);
-                    //g.DrawPolygon(new Pen(Color.Red), PointF[]hull);
+                    
+                    Drawing.Polygon(data, hull, Color.White);
                 }
             }
 
             grayImage.UnlockBits(data);
 
             //post final
-            pictureBox4.Image = grayImage;
+            pictureBox5.Image = grayImage;
         }
 
         private void btnload_Click(object sender, EventArgs e)
@@ -284,9 +284,17 @@ namespace ETVR
 
             this.sliderL.ManipulatorPosition = Settings.Default.sliderL;
             this.sliderR.ManipulatorPosition = Settings.Default.sliderR;
+            this.WidthL.ManipulatorPosition = Settings.Default.blobWidthL;
+            this.WidthR.ManipulatorPosition = Settings.Default.blobWidthR;
+            this.HeightL.ManipulatorPosition = Settings.Default.blobHeightL;
+            this.HeightR.ManipulatorPosition = Settings.Default.blobHeightR;
 
             this.sliderValL.Text = Settings.Default["sliderL"].ToString();
             this.sliderValR.Text = Settings.Default["sliderR"].ToString();
+            this.blobHeightL.Text = Settings.Default["blobHeightL"].ToString();
+            this.blobHeightR.Text = Settings.Default["blobHeightR"].ToString();
+            this.blobWidthL.Text = Settings.Default["blobWidthL"].ToString();
+            this.blobWidthR.Text = Settings.Default["blobWidthR"].ToString();
         }
 
         
@@ -319,6 +327,60 @@ namespace ETVR
             Settings.Default.Save();
         }
 
+        private void WidthL_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobWidthL"] = WidthL.ManipulatorPosition;
+            this.blobWidthL.Text = WidthL.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
 
+        private void WidthL_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobWidthL"] = WidthL.ManipulatorPosition;
+            this.blobWidthL.Text = WidthL.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void HeightL_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobHeightL"] = HeightL.ManipulatorPosition;
+            this.blobHeightL.Text = HeightL.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void HeightL_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobHeightL"] = HeightL.ManipulatorPosition;
+            this.blobHeightL.Text = HeightL.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void WidthR_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobWidthR"] = WidthR.ManipulatorPosition;
+            this.blobWidthR.Text = WidthR.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void WidthR_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobWidthR"] = WidthR.ManipulatorPosition;
+            this.blobWidthR.Text = WidthR.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void HeightR_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobHeightR"] = HeightR.ManipulatorPosition;
+            this.blobHeightR.Text = HeightR.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
+
+        private void HeightR_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default["blobHeightR"] = HeightR.ManipulatorPosition;
+            this.blobHeightR.Text = HeightR.ManipulatorPosition.ToString();
+            Settings.Default.Save();
+        }
     }
 }

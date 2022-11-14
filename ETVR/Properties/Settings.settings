@@ -17,5 +17,17 @@
     <Setting Name="sliderR" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.3</Value>
     </Setting>
+    <Setting Name="blobHeightL" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="blobWidthL" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="blobHeightR" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="blobWidthR" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

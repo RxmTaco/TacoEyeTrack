@@ -44,9 +44,9 @@
             // 
             this.MainPanel.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MainPanel.Location = new System.Drawing.Point(0, 35);
+            this.MainPanel.Location = new System.Drawing.Point(0, 37);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(933, 450);
+            this.MainPanel.Size = new System.Drawing.Size(933, 583);
             this.MainPanel.TabIndex = 1;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Settings_Paint);
             // 
@@ -155,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(933, 485);
+            this.ClientSize = new System.Drawing.Size(933, 620);
             this.Controls.Add(this.HeaderPanel);
             this.Controls.Add(this.MainPanel);
             this.Font = new System.Drawing.Font("Alaska", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
