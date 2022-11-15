@@ -107,14 +107,18 @@ namespace ETVR
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
+            //invert
+            Invert invert = new Invert();
+            invert.ApplyInPlace(grayImage);
+
             //Preview image
             pictureBox3.Image = new Bitmap(grayImage);
 
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
             filter.CoupledSizeFiltering = true;
-            filter.MinWidth = (int)(WidthL.ManipulatorPosition + 1) * 100;
-            filter.MinHeight = (int)(HeightL.ManipulatorPosition + 1) * 100;
+            filter.MinWidth = (int)((WidthL.ManipulatorPosition + 1) * 100);
+            filter.MinHeight = (int)((HeightL.ManipulatorPosition + 1) * 100);
             filter.ApplyInPlace(grayImage);
 
             /* BLOB DETECTION *****************************************************************************/
@@ -223,14 +227,18 @@ namespace ETVR
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
 
+            //invert
+            Invert invert = new Invert();
+            invert.ApplyInPlace(grayImage);
+
             //Preview image
             pictureBox4.Image = new Bitmap(grayImage);
 
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
             filter.CoupledSizeFiltering = true;
-            filter.MinWidth = (int)(WidthR.ManipulatorPosition + 1) * 100;
-            filter.MinHeight = (int)(HeightR.ManipulatorPosition + 1) * 100;
+            filter.MinWidth = (int)((WidthR.ManipulatorPosition + 1) * 100);
+            filter.MinHeight = (int)((HeightR.ManipulatorPosition + 1) * 100);
             filter.ApplyInPlace(grayImage);
 
             /* BLOB DETECTION *****************************************************************************/
@@ -365,57 +373,58 @@ namespace ETVR
         private void WidthL_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["blobWidthL"] = WidthL.ManipulatorPosition;
-            this.blobWidthL.Text = WidthL.ManipulatorPosition.ToString();
+            this.blobWidthL.Text = ((int)((WidthL.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void WidthL_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["blobWidthL"] = WidthL.ManipulatorPosition;
-            this.blobWidthL.Text = WidthL.ManipulatorPosition.ToString();
+            this.blobWidthL.Text = ((int)((WidthL.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void HeightL_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["blobHeightL"] = HeightL.ManipulatorPosition;
-            this.blobHeightL.Text = HeightL.ManipulatorPosition.ToString();
+            this.blobHeightL.Text = ((int)((HeightL.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void HeightL_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["blobHeightL"] = HeightL.ManipulatorPosition;
-            this.blobHeightL.Text = HeightL.ManipulatorPosition.ToString();
+            this.blobHeightL.Text = ((int)((HeightL.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void WidthR_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["blobWidthR"] = WidthR.ManipulatorPosition;
-            this.blobWidthR.Text = WidthR.ManipulatorPosition.ToString();
+            this.blobWidthR.Text = ((int)((WidthR.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void WidthR_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["blobWidthR"] = WidthR.ManipulatorPosition;
-            this.blobWidthR.Text = WidthR.ManipulatorPosition.ToString();
+            this.blobWidthR.Text = ((int)((WidthR.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void HeightR_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["blobHeightR"] = HeightR.ManipulatorPosition;
-            this.blobHeightR.Text = HeightR.ManipulatorPosition.ToString();
+            this.blobHeightR.Text = ((int)((HeightR.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
 
         private void HeightR_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["blobHeightR"] = HeightR.ManipulatorPosition;
-            this.blobHeightR.Text = HeightR.ManipulatorPosition.ToString();
+            this.blobHeightR.Text = ((int)((HeightR.ManipulatorPosition + 1) * 100)).ToString();
             Settings.Default.Save();
         }
+
     }
 }
