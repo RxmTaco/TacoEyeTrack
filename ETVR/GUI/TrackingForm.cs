@@ -27,83 +27,69 @@ using ETVR.Properties;
 using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
-//using Aspose.Imaging;
+using Aspose.Imaging.FileFormats.Jpeg;
 
 namespace ETVR
 {
     public partial class TrackingForm : Form
     {
-        public Bitmap bmp { get; set; }
+        public Bitmap bmp1 { get; set; }
         public Bitmap bmp2 { get; set; }
 
-        public Bitmap bmp3 { get; set; }
-        public Bitmap bmp4 { get; set; }
-
+        string url;
+        string url2;
 
         MJPEGStream stream1;
         MJPEGStream stream2;
-
-        MJPEGStream stream3;
-        MJPEGStream stream4;
 
 
         public TrackingForm()
         {
             InitializeComponent();
+            
 
-            stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
+            if(Settings.Default.urlL.Length == 0)
+            {
+                url = "No Source";
+            }
+            else
+            {
+                url = Settings.Default["urlL"].ToString();
+            }
 
+            stream1 = new MJPEGStream(url);
+            
             stream1.NewFrame += playerControl1_NewFrame;
 
+            if (Settings.Default.urlR.Length == 0)
+            {
+                url2 = "No Source";
+            }
+            else
+            {
+                url2 = Settings.Default["urlR"].ToString();
+            }
 
-            stream2 = new MJPEGStream(Settings.Default["urlR"].ToString());
-
+            stream2 = new MJPEGStream(url2);
+            
             stream2.NewFrame += playerControl2_NewFrame;
-
-
-            stream3 = new MJPEGStream(Settings.Default["urlL"].ToString());
-
-            stream3.NewFrame += playerControl3_NewFrame;
-
-
-            stream4 = new MJPEGStream(Settings.Default["urlR"].ToString());
-
-            stream4.NewFrame += playerControl4_NewFrame;
-
 
             stream1.Start();
             stream2.Start();
-            stream3.Start();
-            stream4.Start();
         }
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Source video
-            bmp = (Bitmap)eventArgs.Frame.Clone();
-            pictureBox1.Image = bmp;
-        }
-
-        public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            //Source video
-            bmp2 = (Bitmap)eventArgs.Frame.Clone();
-            pictureBox2.Image = bmp2;
-        }
-
-
-        public void playerControl3_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
             //Edited Stream
-            bmp3 = (Bitmap)eventArgs.Frame.Clone();
+            bmp1 = (Bitmap)eventArgs.Frame.Clone();
 
-
+            pictureBox1.Image = new Bitmap(bmp1);
             /* FILTERING *********************************************************************************/
 
 
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
-            Bitmap grayImage = grayscale.Apply(bmp3);
+            Bitmap grayImage = grayscale.Apply(bmp1);
 
             /*Gamma
             GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
@@ -208,16 +194,18 @@ namespace ETVR
             pictureBox6.Image = grayImage;
         }
 
-        public void playerControl4_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Stream
-            bmp4 = (Bitmap)eventArgs.Frame.Clone();
+            bmp2 = (Bitmap)eventArgs.Frame.Clone();
+
+            pictureBox2.Image = new Bitmap(bmp2);
 
             /* FILTERING *********************************************************************************/
 
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
-            Bitmap grayImage = grayscale.Apply(bmp4);
+            Bitmap grayImage = grayscale.Apply(bmp2);
 
             /*Gamma
             GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
@@ -323,13 +311,13 @@ namespace ETVR
 
         private void btnload_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void TrackingForm_Load(object sender, EventArgs e)
         {
-            this.urlL.Text = Settings.Default["urlL"].ToString();
-            this.urlR.Text = Settings.Default["urlR"].ToString();
+            this.urlL.Text = url;
+            this.urlR.Text = url2;
 
             this.sliderL.ManipulatorPosition = Settings.Default.sliderL;
             this.sliderR.ManipulatorPosition = Settings.Default.sliderR;
@@ -345,9 +333,7 @@ namespace ETVR
             this.blobWidthL.Text = Settings.Default["blobWidthL"].ToString();
             this.blobWidthR.Text = Settings.Default["blobWidthR"].ToString();
         }
-
         
-
         private void sliderL_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["sliderL"] = sliderL.ManipulatorPosition;
