@@ -12,10 +12,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="sliderL" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">0.2</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="sliderR" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">0.3</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="blobHeightL" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -27,6 +27,12 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="blobWidthR" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="rotationL" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="rotationR" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

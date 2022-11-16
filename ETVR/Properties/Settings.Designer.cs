@@ -61,7 +61,7 @@ namespace ETVR.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public float sliderL {
             get {
                 return ((float)(this["sliderL"]));
@@ -73,7 +73,7 @@ namespace ETVR.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public float sliderR {
             get {
                 return ((float)(this["sliderR"]));
@@ -128,6 +128,30 @@ namespace ETVR.Properties {
             }
             set {
                 this["blobWidthR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float rotationL {
+            get {
+                return ((float)(this["rotationL"]));
+            }
+            set {
+                this["rotationL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float rotationR {
+            get {
+                return ((float)(this["rotationR"]));
+            }
+            set {
+                this["rotationR"] = value;
             }
         }
     }

@@ -57,6 +57,8 @@
             this.pictureBox6 = new AForge.Controls.PictureBox();
             this.pictureBox7 = new AForge.Controls.PictureBox();
             this.pictureBox8 = new AForge.Controls.PictureBox();
+            this.rotateSliderL = new AForge.Controls.SliderControl();
+            this.rotateSliderR = new AForge.Controls.SliderControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -71,7 +73,7 @@
             // 
             this.urlL.AutoSize = true;
             this.urlL.ForeColor = System.Drawing.SystemColors.Control;
-            this.urlL.Location = new System.Drawing.Point(12, 54);
+            this.urlL.Location = new System.Drawing.Point(10, 54);
             this.urlL.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlL.Name = "urlL";
             this.urlL.Size = new System.Drawing.Size(25, 13);
@@ -82,7 +84,7 @@
             // 
             this.urlR.AutoSize = true;
             this.urlR.ForeColor = System.Drawing.SystemColors.Control;
-            this.urlR.Location = new System.Drawing.Point(401, 54);
+            this.urlR.Location = new System.Drawing.Point(411, 54);
             this.urlR.MaximumSize = new System.Drawing.Size(200, 20);
             this.urlR.Name = "urlR";
             this.urlR.Size = new System.Drawing.Size(32, 13);
@@ -107,7 +109,7 @@
             // 
             // sliderL
             // 
-            this.sliderL.Location = new System.Drawing.Point(12, 70);
+            this.sliderL.Location = new System.Drawing.Point(6, 70);
             this.sliderL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.sliderL.ManipulatorPosition = 0F;
             this.sliderL.Name = "sliderL";
@@ -122,7 +124,7 @@
             // 
             // sliderR
             // 
-            this.sliderR.Location = new System.Drawing.Point(404, 70);
+            this.sliderR.Location = new System.Drawing.Point(414, 70);
             this.sliderR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.sliderR.ManipulatorPosition = 0F;
             this.sliderR.Name = "sliderR";
@@ -139,7 +141,7 @@
             // 
             this.sliderValL.AutoSize = true;
             this.sliderValL.ForeColor = System.Drawing.SystemColors.Control;
-            this.sliderValL.Location = new System.Drawing.Point(333, 70);
+            this.sliderValL.Location = new System.Drawing.Point(327, 70);
             this.sliderValL.Name = "sliderValL";
             this.sliderValL.Size = new System.Drawing.Size(45, 13);
             this.sliderValL.TabIndex = 8;
@@ -149,7 +151,7 @@
             // 
             this.sliderValR.AutoSize = true;
             this.sliderValR.ForeColor = System.Drawing.SystemColors.Control;
-            this.sliderValR.Location = new System.Drawing.Point(725, 70);
+            this.sliderValR.Location = new System.Drawing.Point(735, 70);
             this.sliderValR.Name = "sliderValR";
             this.sliderValR.Size = new System.Drawing.Size(45, 13);
             this.sliderValR.TabIndex = 9;
@@ -157,45 +159,49 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = null;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 157);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 157);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.White;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = null;
-            this.pictureBox2.Location = new System.Drawing.Point(404, 157);
+            this.pictureBox2.Location = new System.Drawing.Point(414, 157);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 11;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Image = null;
-            this.pictureBox4.Location = new System.Drawing.Point(590, 157);
+            this.pictureBox4.Location = new System.Drawing.Point(600, 157);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox4.TabIndex = 13;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox3
             // 
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Image = null;
-            this.pictureBox3.Location = new System.Drawing.Point(205, 157);
+            this.pictureBox3.Location = new System.Drawing.Point(199, 157);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox3.TabIndex = 12;
             this.pictureBox3.TabStop = false;
             // 
@@ -203,7 +209,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(202, 70);
+            this.label1.Location = new System.Drawing.Point(196, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 14;
@@ -213,7 +219,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(594, 70);
+            this.label2.Location = new System.Drawing.Point(604, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 15;
@@ -223,7 +229,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(594, 99);
+            this.label3.Location = new System.Drawing.Point(604, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 21;
@@ -233,7 +239,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(202, 99);
+            this.label4.Location = new System.Drawing.Point(196, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 20;
@@ -243,7 +249,7 @@
             // 
             this.blobWidthR.AutoSize = true;
             this.blobWidthR.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobWidthR.Location = new System.Drawing.Point(725, 99);
+            this.blobWidthR.Location = new System.Drawing.Point(735, 99);
             this.blobWidthR.Name = "blobWidthR";
             this.blobWidthR.Size = new System.Drawing.Size(45, 13);
             this.blobWidthR.TabIndex = 19;
@@ -253,7 +259,7 @@
             // 
             this.blobWidthL.AutoSize = true;
             this.blobWidthL.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobWidthL.Location = new System.Drawing.Point(333, 99);
+            this.blobWidthL.Location = new System.Drawing.Point(327, 99);
             this.blobWidthL.Name = "blobWidthL";
             this.blobWidthL.Size = new System.Drawing.Size(45, 13);
             this.blobWidthL.TabIndex = 18;
@@ -261,7 +267,7 @@
             // 
             // WidthR
             // 
-            this.WidthR.Location = new System.Drawing.Point(404, 99);
+            this.WidthR.Location = new System.Drawing.Point(414, 99);
             this.WidthR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.WidthR.ManipulatorPosition = 0F;
             this.WidthR.Name = "WidthR";
@@ -276,7 +282,7 @@
             // 
             // WidthL
             // 
-            this.WidthL.Location = new System.Drawing.Point(12, 99);
+            this.WidthL.Location = new System.Drawing.Point(6, 99);
             this.WidthL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.WidthL.ManipulatorPosition = 0F;
             this.WidthL.Name = "WidthL";
@@ -293,7 +299,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(594, 128);
+            this.label7.Location = new System.Drawing.Point(604, 128);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 27;
@@ -303,7 +309,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(202, 128);
+            this.label8.Location = new System.Drawing.Point(196, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 13);
             this.label8.TabIndex = 26;
@@ -313,7 +319,7 @@
             // 
             this.blobHeightR.AutoSize = true;
             this.blobHeightR.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobHeightR.Location = new System.Drawing.Point(725, 128);
+            this.blobHeightR.Location = new System.Drawing.Point(735, 128);
             this.blobHeightR.Name = "blobHeightR";
             this.blobHeightR.Size = new System.Drawing.Size(45, 13);
             this.blobHeightR.TabIndex = 25;
@@ -323,7 +329,7 @@
             // 
             this.blobHeightL.AutoSize = true;
             this.blobHeightL.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobHeightL.Location = new System.Drawing.Point(333, 128);
+            this.blobHeightL.Location = new System.Drawing.Point(327, 128);
             this.blobHeightL.Name = "blobHeightL";
             this.blobHeightL.Size = new System.Drawing.Size(45, 13);
             this.blobHeightL.TabIndex = 24;
@@ -331,7 +337,7 @@
             // 
             // HeightR
             // 
-            this.HeightR.Location = new System.Drawing.Point(404, 128);
+            this.HeightR.Location = new System.Drawing.Point(414, 128);
             this.HeightR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.HeightR.ManipulatorPosition = 0F;
             this.HeightR.Name = "HeightR";
@@ -346,7 +352,7 @@
             // 
             // HeightL
             // 
-            this.HeightL.Location = new System.Drawing.Point(12, 128);
+            this.HeightL.Location = new System.Drawing.Point(6, 128);
             this.HeightL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.HeightL.ManipulatorPosition = 0F;
             this.HeightL.Name = "HeightL";
@@ -361,54 +367,93 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Image = null;
-            this.pictureBox5.Location = new System.Drawing.Point(590, 343);
+            this.pictureBox5.Location = new System.Drawing.Point(600, 343);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox5.TabIndex = 31;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox6
             // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Image = null;
-            this.pictureBox6.Location = new System.Drawing.Point(205, 343);
+            this.pictureBox6.Location = new System.Drawing.Point(199, 343);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox6.TabIndex = 30;
             this.pictureBox6.TabStop = false;
             // 
             // pictureBox7
             // 
+            this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Image = null;
-            this.pictureBox7.Location = new System.Drawing.Point(404, 343);
+            this.pictureBox7.Location = new System.Drawing.Point(414, 343);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox7.TabIndex = 29;
             this.pictureBox7.TabStop = false;
             // 
             // pictureBox8
             // 
+            this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Image = null;
-            this.pictureBox8.Location = new System.Drawing.Point(19, 343);
+            this.pictureBox8.Location = new System.Drawing.Point(13, 343);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox8.TabIndex = 28;
             this.pictureBox8.TabStop = false;
+            // 
+            // rotateSliderL
+            // 
+            this.rotateSliderL.IsHorizontal = false;
+            this.rotateSliderL.Location = new System.Drawing.Point(385, 157);
+            this.rotateSliderL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.rotateSliderL.ManipulatorPosition = 0F;
+            this.rotateSliderL.Name = "rotateSliderL";
+            this.rotateSliderL.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.rotateSliderL.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.rotateSliderL.ResetPositionOnMouseRelease = false;
+            this.rotateSliderL.Size = new System.Drawing.Size(22, 366);
+            this.rotateSliderL.TabIndex = 32;
+            this.rotateSliderL.Text = "Rotate Left Image";
+            this.rotateSliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rotateSliderL_MouseDown);
+            this.rotateSliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rotateSliderL_MouseUp);
+            // 
+            // rotateSliderR
+            // 
+            this.rotateSliderR.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rotateSliderR.IsHorizontal = false;
+            this.rotateSliderR.Location = new System.Drawing.Point(786, 157);
+            this.rotateSliderR.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.rotateSliderR.ManipulatorPosition = 0F;
+            this.rotateSliderR.Name = "rotateSliderR";
+            this.rotateSliderR.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.rotateSliderR.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.rotateSliderR.ResetPositionOnMouseRelease = false;
+            this.rotateSliderR.Size = new System.Drawing.Size(22, 366);
+            this.rotateSliderR.TabIndex = 33;
+            this.rotateSliderR.Text = "Rotate Right Image";
+            this.rotateSliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseDown);
+            this.rotateSliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseUp);
             // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(800, 550);
+            this.ClientSize = new System.Drawing.Size(820, 550);
+            this.Controls.Add(this.rotateSliderR);
+            this.Controls.Add(this.rotateSliderL);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox7);
@@ -485,5 +530,7 @@
         private AForge.Controls.PictureBox pictureBox6;
         private AForge.Controls.PictureBox pictureBox7;
         private AForge.Controls.PictureBox pictureBox8;
+        private AForge.Controls.SliderControl rotateSliderL;
+        private AForge.Controls.SliderControl rotateSliderR;
     }
 }

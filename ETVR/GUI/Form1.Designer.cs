@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EyeTrackVR));
             this.MainPanel = new System.Windows.Forms.Panel();
             this.HeaderPanel = new System.Windows.Forms.Panel();
-            this.btnhide = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
+            this.btnhide = new System.Windows.Forms.Button();
             this.btncropping = new System.Windows.Forms.Button();
             this.btntracking = new System.Windows.Forms.Button();
             this.btnsettings = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MainPanel.Location = new System.Drawing.Point(0, 37);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(933, 583);
+            this.MainPanel.Size = new System.Drawing.Size(964, 583);
             this.MainPanel.TabIndex = 1;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Settings_Paint);
             // 
@@ -54,7 +54,7 @@
             // 
             this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
             this.HeaderPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HeaderPanel.BackgroundImage")));
-            this.HeaderPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.HeaderPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.HeaderPanel.Controls.Add(this.btnclose);
             this.HeaderPanel.Controls.Add(this.btnhide);
             this.HeaderPanel.Controls.Add(this.btncropping);
@@ -63,11 +63,26 @@
             this.HeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderPanel.Location = new System.Drawing.Point(0, 0);
             this.HeaderPanel.Name = "HeaderPanel";
-            this.HeaderPanel.Size = new System.Drawing.Size(933, 37);
+            this.HeaderPanel.Size = new System.Drawing.Size(964, 37);
             this.HeaderPanel.TabIndex = 2;
             this.HeaderPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HeaderPanel_Paint);
             this.HeaderPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HeaderPanel_MouseDown);
             this.HeaderPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HeaderPanel_MouseMove);
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Black;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.ForeColor = System.Drawing.Color.White;
+            this.btnclose.Location = new System.Drawing.Point(922, 0);
+            this.btnclose.Margin = new System.Windows.Forms.Padding(0);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(40, 37);
+            this.btnclose.TabIndex = 3;
+            this.btnclose.Text = "X";
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // btnhide
             // 
@@ -77,7 +92,7 @@
             this.btnhide.FlatAppearance.BorderSize = 0;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnhide.ForeColor = System.Drawing.Color.White;
-            this.btnhide.Location = new System.Drawing.Point(854, 0);
+            this.btnhide.Location = new System.Drawing.Point(883, 0);
             this.btnhide.Margin = new System.Windows.Forms.Padding(0);
             this.btnhide.Name = "btnhide";
             this.btnhide.Size = new System.Drawing.Size(39, 37);
@@ -85,21 +100,6 @@
             this.btnhide.Text = "-";
             this.btnhide.UseVisualStyleBackColor = false;
             this.btnhide.Click += new System.EventHandler(this.btnhide_Click);
-            // 
-            // btnclose
-            // 
-            this.btnclose.BackColor = System.Drawing.Color.Black;
-            this.btnclose.FlatAppearance.BorderSize = 0;
-            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.ForeColor = System.Drawing.Color.White;
-            this.btnclose.Location = new System.Drawing.Point(893, 0);
-            this.btnclose.Margin = new System.Windows.Forms.Padding(0);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(40, 37);
-            this.btnclose.TabIndex = 3;
-            this.btnclose.Text = "X";
-            this.btnclose.UseVisualStyleBackColor = false;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // btncropping
             // 
@@ -150,8 +150,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(933, 620);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(964, 620);
             this.Controls.Add(this.HeaderPanel);
             this.Controls.Add(this.MainPanel);
             this.Font = new System.Drawing.Font("Alaska", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

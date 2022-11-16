@@ -28,6 +28,7 @@ using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
 using Aspose.Imaging.FileFormats.Jpeg;
+//using System.Windows.Media;
 
 namespace ETVR
 {
@@ -82,14 +83,17 @@ namespace ETVR
         {
             //Edited Stream
             bmp1 = (Bitmap)eventArgs.Frame.Clone();
-
-            pictureBox1.Image = new Bitmap(bmp1);
-            /* FILTERING *********************************************************************************/
-
-
+            
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
             Bitmap grayImage = grayscale.Apply(bmp1);
+            
+            //Rotation
+            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderR.ManipulatorPosition + 1) * 180), true);
+            grayImage = rotation.Apply(grayImage);
+
+            pictureBox1.Image = new Bitmap(grayImage);
+            /* FILTERING *********************************************************************************/
 
             /*Gamma
             GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
@@ -202,14 +206,18 @@ namespace ETVR
         {
             //Stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
-
-            pictureBox2.Image = new Bitmap(bmp2);
-
-            /* FILTERING *********************************************************************************/
-
+            
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
             Bitmap grayImage = grayscale.Apply(bmp2);
+            
+            //Rotation
+            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderR.ManipulatorPosition + 1) * 180), true);
+            grayImage = rotation.Apply(grayImage);
+            
+            pictureBox2.Image = new Bitmap(grayImage);
+            
+            /* FILTERING *********************************************************************************/
 
             /*Gamma
             GammaCorrection gammaL = new GammaCorrection((sliderR.ManipulatorPosition + 1) * 5);
@@ -221,7 +229,7 @@ namespace ETVR
             AdditiveNoise filter = new AdditiveNoise(generator);
             filter.ApplyInPlace(grayImage);
             */
-
+            
             //Thresholding
             int rounded = (int)Math.Round((sliderR.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
@@ -340,6 +348,9 @@ namespace ETVR
             this.blobHeightR.Text = Settings.Default["blobHeightR"].ToString();
             this.blobWidthL.Text = Settings.Default["blobWidthL"].ToString();
             this.blobWidthR.Text = Settings.Default["blobWidthR"].ToString();
+            
+            this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 100) - 1.8);
+            this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 100) - 1.8);
         }
         
         private void sliderL_MouseDown(object sender, MouseEventArgs e)
@@ -426,5 +437,28 @@ namespace ETVR
             Settings.Default.Save();
         }
 
+        private void rotateSliderL_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default.rotationL = (float)((rotateSliderL.ManipulatorPosition + 1) * 180);
+            Settings.Default.Save();
+        }
+
+        private void rotateSliderL_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default.rotationL = (float)((rotateSliderL.ManipulatorPosition + 1) * 180);
+            Settings.Default.Save();
+        }
+
+        private void rotateSliderR_MouseDown(object sender, MouseEventArgs e)
+        {
+            Settings.Default.rotationR = (float)((rotateSliderR.ManipulatorPosition + 1) * 180);
+            Settings.Default.Save();
+        }
+
+        private void rotateSliderR_MouseUp(object sender, MouseEventArgs e)
+        {
+            Settings.Default.rotationR = (float)((rotateSliderR.ManipulatorPosition + 1) * 180);
+            Settings.Default.Save();
+        }
     }
 }
