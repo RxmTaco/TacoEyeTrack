@@ -83,13 +83,21 @@ namespace ETVR
         {
             //Edited Stream
             bmp1 = (Bitmap)eventArgs.Frame.Clone();
-            
+
+            //Cropping
+            Crop crop = new Crop(new Rectangle(
+                Settings.Default.startPointL.X,
+                Settings.Default.startPointL.Y,
+                Settings.Default.endPointL.X - Settings.Default.startPointL.X,
+                Settings.Default.endPointL.Y - Settings.Default.startPointL.Y));
+            Bitmap newImage = crop.Apply(bmp1);
+
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
-            Bitmap grayImage = grayscale.Apply(bmp1);
+            Bitmap grayImage = grayscale.Apply(newImage);
             
             //Rotation
-            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderR.ManipulatorPosition + 1) * 180), true);
+            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderL.ManipulatorPosition + 1) * 180), true);
             grayImage = rotation.Apply(grayImage);
 
             pictureBox1.Image = new Bitmap(grayImage);
@@ -206,10 +214,18 @@ namespace ETVR
         {
             //Stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
-            
+
+            //Cropping
+            Crop crop = new Crop(new Rectangle(
+                Settings.Default.startPointR.X,
+                Settings.Default.startPointR.Y,
+                Settings.Default.endPointR.X - Settings.Default.startPointR.X,
+                Settings.Default.endPointR.Y - Settings.Default.startPointR.Y));
+            Bitmap newImage = crop.Apply(bmp2);
+
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
-            Bitmap grayImage = grayscale.Apply(bmp2);
+            Bitmap grayImage = grayscale.Apply(newImage);
             
             //Rotation
             RotateBicubic rotation = new RotateBicubic((int)((rotateSliderR.ManipulatorPosition + 1) * 180), true);
