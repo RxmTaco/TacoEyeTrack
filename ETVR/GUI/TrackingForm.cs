@@ -27,7 +27,7 @@ using ETVR.Properties;
 using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
-using Aspose.Imaging.FileFormats.Jpeg;
+using System.Net;
 
 namespace ETVR
 {
@@ -42,6 +42,8 @@ namespace ETVR
         MJPEGStream stream1;
         MJPEGStream stream2;
 
+        System.Drawing.PointF centerL;
+        System.Drawing.PointF centerR;
 
         public TrackingForm()
         {
@@ -144,6 +146,9 @@ namespace ETVR
                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
+            //Store hull points
+            List<IntPoint> hull = default;
+
             foreach (Blob blob in blobs)
             {
                 blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
@@ -156,13 +161,19 @@ namespace ETVR
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    List<IntPoint> hull = hullFinder.FindHull(edgePoints);
+                    hull = hullFinder.FindHull(edgePoints);
 
                     // create graphics and draw the hull
 
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
+
+            if(hull.Count > 0)
+            {
+                centerL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));
+            }
+            
 
             grayImage.UnlockBits(data);
 
@@ -239,13 +250,15 @@ namespace ETVR
                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
+            List<IntPoint> edgePoints = new List<IntPoint>();
+
             foreach (Blob blob in blobs)
             {
                 blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
                 if (leftPoints.Count > 0 && rightPoints.Count > 0)
                 {
                     // get blob's edge points
-                    List<IntPoint> edgePoints = new List<IntPoint>();
+                    edgePoints = new List<IntPoint>();
                     edgePoints.AddRange(leftPoints);
                     edgePoints.AddRange(rightPoints);
 
@@ -259,15 +272,42 @@ namespace ETVR
                 }
             }
 
+            if (edgePoints.Count > 0)
+            {
+                centerR = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));
+            }
+
             grayImage.UnlockBits(data);
 
             //post final
             pictureBox5.Image = grayImage;
         }
+        
+        private void pictureBox8_Paint(object sender, PaintEventArgs e)
+        {
+            while (true)
+            {
+                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+                e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+                pen.Dispose();
+                break;
+            }
+            this.Refresh();
+        }
 
+        private void pictureBox7_Paint(object sender, PaintEventArgs e)
+        {
+            while (true)
+            {
+                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+                e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                pen.Dispose();
+                break;
+            }
+            this.Refresh();
+        }
         private void btnload_Click(object sender, EventArgs e)
         {
-           
         }
 
         private void TrackingForm_Load(object sender, EventArgs e)

@@ -55,18 +55,18 @@
             this.HeightL = new AForge.Controls.SliderControl();
             this.pictureBox5 = new AForge.Controls.PictureBox();
             this.pictureBox6 = new AForge.Controls.PictureBox();
-            this.pictureBox7 = new AForge.Controls.PictureBox();
             this.pictureBox8 = new AForge.Controls.PictureBox();
             this.rotateSliderL = new AForge.Controls.SliderControl();
             this.rotateSliderR = new AForge.Controls.SliderControl();
+            this.pictureBox7 = new AForge.Controls.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // urlL
@@ -389,18 +389,6 @@
             this.pictureBox6.TabIndex = 30;
             this.pictureBox6.TabStop = false;
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox7.Image = null;
-            this.pictureBox7.Location = new System.Drawing.Point(414, 343);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(180, 180);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox7.TabIndex = 29;
-            this.pictureBox7.TabStop = false;
-            // 
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
@@ -412,6 +400,7 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox8.TabIndex = 28;
             this.pictureBox8.TabStop = false;
+            this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox8_Paint);
             // 
             // rotateSliderL
             // 
@@ -445,6 +434,19 @@
             this.rotateSliderR.Text = "Rotate Right Image";
             this.rotateSliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseDown);
             this.rotateSliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseUp);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox7.Image = null;
+            this.pictureBox7.Location = new System.Drawing.Point(414, 343);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox7.TabIndex = 29;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox7_Paint);
             // 
             // TrackingForm
             // 
@@ -493,8 +495,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,9 +530,9 @@
         private AForge.Controls.SliderControl HeightL;
         private AForge.Controls.PictureBox pictureBox5;
         private AForge.Controls.PictureBox pictureBox6;
-        private AForge.Controls.PictureBox pictureBox7;
         private AForge.Controls.PictureBox pictureBox8;
         private AForge.Controls.SliderControl rotateSliderL;
         private AForge.Controls.SliderControl rotateSliderR;
+        private AForge.Controls.PictureBox pictureBox7;
     }
 }
