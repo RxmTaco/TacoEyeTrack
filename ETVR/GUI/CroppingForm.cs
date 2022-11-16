@@ -93,7 +93,10 @@ namespace ETVR
 
         private void CroppingForm_Load(object sender, EventArgs e)
         {
-            
+            endPointL = Settings.Default.endPointL;
+            endPointR = Settings.Default.endPointR;
+            startPointL = Settings.Default.startPointL;
+            startPointR = Settings.Default.startPointR;
         }
         
         public void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -104,6 +107,7 @@ namespace ETVR
                 int x = b.Width * e.X / pictureBox1.Width;
                 int y = b.Height * e.Y / pictureBox1.Height;
                 startPointL = new System.Drawing.Point(x, y);
+                Settings.Default.startPointL = startPointL;
             }
         }
         
@@ -115,6 +119,7 @@ namespace ETVR
                 int x = b.Width * e.X / pictureBox1.Width;
                 int y = b.Height * e.Y / pictureBox1.Height;
                 endPointL = new System.Drawing.Point(x, y);
+                Settings.Default.endPointL = endPointL;
                 break;
             }
         }
@@ -127,6 +132,7 @@ namespace ETVR
                 int x = b.Width * e.X / pictureBox2.Width;
                 int y = b.Height * e.Y / pictureBox2.Height;
                 startPointR = new System.Drawing.Point(x, y);
+                Settings.Default.startPointR = startPointR;
             }
         }
 
@@ -138,6 +144,7 @@ namespace ETVR
                 int x = b.Width * e.X / pictureBox2.Width;
                 int y = b.Height * e.Y / pictureBox2.Height;
                 endPointR = new System.Drawing.Point(x, y);
+                Settings.Default.endPointR = endPointR;
                 break;
             }
         }

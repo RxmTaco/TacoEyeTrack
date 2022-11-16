@@ -154,5 +154,53 @@ namespace ETVR.Properties {
                 this["rotationR"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point startPointL {
+            get {
+                return ((global::System.Drawing.Point)(this["startPointL"]));
+            }
+            set {
+                this["startPointL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point startPointR {
+            get {
+                return ((global::System.Drawing.Point)(this["startPointR"]));
+            }
+            set {
+                this["startPointR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point endPointL {
+            get {
+                return ((global::System.Drawing.Point)(this["endPointL"]));
+            }
+            set {
+                this["endPointL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point endPointR {
+            get {
+                return ((global::System.Drawing.Point)(this["endPointR"]));
+            }
+            set {
+                this["endPointR"] = value;
+            }
+        }
     }
 }
