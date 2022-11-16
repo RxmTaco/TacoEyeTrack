@@ -39,13 +39,12 @@ namespace ETVR
         {
             InitializeComponent();
 
+            //Start stream
             stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
-
             stream1.NewFrame += playerControl1_NewFrame;
 
 
             stream2 = new MJPEGStream(Settings.Default["urlR"].ToString());
-
             stream2.NewFrame += playerControl2_NewFrame;
 
             stream1.Start();
@@ -54,12 +53,14 @@ namespace ETVR
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            //Image from stream
             bmp = (Bitmap)eventArgs.Frame.Clone();
 
             using (var graphics = Graphics.FromImage(bmp))
             {
                 Pen pen = new Pen(Color.Red, 3);
-                
+
+                //Draw rectangle
                 graphics.DrawLine(pen, startPointL.X, startPointL.Y, endPointL.X, startPointL.Y);   //top
                 graphics.DrawLine(pen, endPointL.X, startPointL.Y, endPointL.X, endPointL.Y);       //right
                 graphics.DrawLine(pen, startPointL.X, startPointL.Y, startPointL.X, endPointL.Y);   //left
@@ -73,12 +74,14 @@ namespace ETVR
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            //Image from stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
 
             using (var graphics = Graphics.FromImage(bmp2))
             {
                 Pen pen = new Pen(Color.Red, 3);
 
+                //Draw rectangle
                 graphics.DrawLine(pen, startPointR.X, startPointR.Y, endPointR.X, startPointR.Y);   //top
                 graphics.DrawLine(pen, endPointR.X, startPointR.Y, endPointR.X, endPointR.Y);       //right
                 graphics.DrawLine(pen, startPointR.X, startPointR.Y, startPointR.X, endPointR.Y);   //left
@@ -93,6 +96,7 @@ namespace ETVR
 
         private void CroppingForm_Load(object sender, EventArgs e)
         {
+            //Set variables from settings on load
             endPointL = Settings.Default.endPointL;
             endPointR = Settings.Default.endPointR;
             startPointL = Settings.Default.startPointL;
@@ -101,6 +105,7 @@ namespace ETVR
         
         public void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //Get start point
             if ((e.Button == MouseButtons.Left) && (onBox1 == true))
             {
                 System.Drawing.Image b = pictureBox1.Image;
@@ -113,6 +118,7 @@ namespace ETVR
         
         private void pictureBox1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //Track end point
             while ((e.Button == MouseButtons.Left) && (onBox1 == true))
             {
                 System.Drawing.Image b = pictureBox1.Image;
@@ -126,6 +132,7 @@ namespace ETVR
 
         private void pictureBox2_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //Get start point
             if ((e.Button == MouseButtons.Left) && (onBox2 == true))
             {
                 System.Drawing.Image b = pictureBox2.Image;
@@ -138,6 +145,7 @@ namespace ETVR
 
         private void pictureBox2_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //Track end point
             while ((e.Button == MouseButtons.Left) && (onBox2 == true))
             {
                 System.Drawing.Image b = pictureBox2.Image;
@@ -148,6 +156,8 @@ namespace ETVR
                 break;
             }
         }
+
+        //***Checking if mouse is on picturebox***//
         bool onBox1 = false;
         bool onBox2 = false;
 

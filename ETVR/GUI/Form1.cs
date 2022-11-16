@@ -24,23 +24,7 @@ namespace ETVR
 
         private void EyeTrackVR_Load(object sender, EventArgs e)
         {
-            //Load into settings menu
             loadform(new SettingsForm());
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Header_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Panel_Settings_Paint(object sender, PaintEventArgs e)
@@ -50,6 +34,7 @@ namespace ETVR
 
         public void loadform(object Form)
         {
+            //Load forms into main panel view
             if (this.MainPanel.Controls.Count > 0)
                 this.MainPanel.Controls.RemoveAt(0);
             Form f = Form as Form;
@@ -78,7 +63,6 @@ namespace ETVR
         private void btnclose_Click(object sender, EventArgs e)
         {
             //Application exit
-
             Application.ExitThread();
             Thread.Sleep(100);
             Application.Exit();
@@ -89,12 +73,8 @@ namespace ETVR
             //Window minimize to task bar
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void HeaderPanel_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
+        
+        //*** Mouse move event for window drag ***//
         private void HeaderPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

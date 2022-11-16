@@ -28,7 +28,6 @@ using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
 using Aspose.Imaging.FileFormats.Jpeg;
-//using System.Windows.Media;
 
 namespace ETVR
 {
@@ -46,8 +45,8 @@ namespace ETVR
 
         public TrackingForm()
         {
+            //Begin stream
             InitializeComponent();
-            
 
             if(Settings.Default.urlL.Length == 0)
             {
@@ -59,7 +58,6 @@ namespace ETVR
             }
 
             stream1 = new MJPEGStream(url);
-            
             stream1.NewFrame += playerControl1_NewFrame;
 
             if (Settings.Default.urlR.Length == 0)
@@ -72,7 +70,6 @@ namespace ETVR
             }
 
             stream2 = new MJPEGStream(url2);
-            
             stream2.NewFrame += playerControl2_NewFrame;
 
             stream1.Start();
@@ -81,7 +78,7 @@ namespace ETVR
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Edited Stream
+            //Get images from stream
             bmp1 = (Bitmap)eventArgs.Frame.Clone();
 
             //Cropping
@@ -135,13 +132,14 @@ namespace ETVR
 
             /* BLOB DETECTION *****************************************************************************/
 
-
+            //Initialize blob counter
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(grayImage);
             Blob[] blobs = blobCounter.GetObjectsInformation();
 
             List<IntPoint> leftPoints, rightPoints;
 
+            //Lock image for drawing
             BitmapData data = grayImage.LockBits(
                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
@@ -174,7 +172,7 @@ namespace ETVR
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            //Stream
+            //Get images from stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
 
             //Cropping
@@ -229,13 +227,14 @@ namespace ETVR
 
             /* BLOB DETECTION *****************************************************************************/
 
-
+            //Initialize blob counter
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(grayImage);
             Blob[] blobs = blobCounter.GetObjectsInformation();
 
             List<IntPoint> leftPoints, rightPoints;
 
+            //Lock image for drawing
             BitmapData data = grayImage.LockBits(
                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
@@ -273,6 +272,7 @@ namespace ETVR
 
         private void TrackingForm_Load(object sender, EventArgs e)
         {
+            //Load all variables from settings
             this.urlL.Text = url;
             this.urlR.Text = url2;
 
