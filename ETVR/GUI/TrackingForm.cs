@@ -97,7 +97,7 @@ namespace ETVR
             Bitmap grayImage = grayscale.Apply(newImage);
             
             //Rotation
-            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderL.ManipulatorPosition + 1) * 180), true);
+            RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationL, true);
             grayImage = rotation.Apply(grayImage);
 
             pictureBox1.Image = new Bitmap(grayImage);
@@ -135,44 +135,6 @@ namespace ETVR
 
             /* BLOB DETECTION *****************************************************************************/
 
-            /*
-
-            // process image with blob counter
-            BlobCounter blobCounter = new BlobCounter();
-            blobCounter.ProcessImage(bmp3);
-            Blob[] blobs = blobCounter.GetObjectsInformation();
-
-            // create convex hull searching algorithm
-            GrahamConvexHull hullFinder = new GrahamConvexHull();
-
-            // lock image to draw on it
-            BitmapData data = bmp3.LockBits(
-                new Rectangle(0, 0, bmp3.Width, bmp3.Height),
-                    ImageLockMode.ReadWrite, bmp3.PixelFormat);
-
-            
-            // process each blob
-            foreach (Blob blob in blobs)
-            {
-                List <IntPoint> leftPoints, rightPoints, edgePoints = default;
-
-                // get blob's edge points
-                blobCounter.GetBlobsLeftAndRightEdges(blob,
-                out leftPoints, out rightPoints);
-
-                edgePoints.AddRange(leftPoints);
-                edgePoints.AddRange(rightPoints);
-
-                // blob's convex hull
-                List<IntPoint> hull = hullFinder.FindHull(edgePoints);
-
-                Drawing.Polygon(data, hull, Color.Red);
-            }
-            
-
-            bmp3.UnlockBits(data);
-
-            */
 
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(grayImage);
@@ -228,7 +190,7 @@ namespace ETVR
             Bitmap grayImage = grayscale.Apply(newImage);
             
             //Rotation
-            RotateBicubic rotation = new RotateBicubic((int)((rotateSliderR.ManipulatorPosition + 1) * 180), true);
+            RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationR, true);
             grayImage = rotation.Apply(grayImage);
             
             pictureBox2.Image = new Bitmap(grayImage);
@@ -267,43 +229,6 @@ namespace ETVR
 
             /* BLOB DETECTION *****************************************************************************/
 
-
-            /*
-             // process image with blob counter
-             BlobCounter blobCounter = new BlobCounter();
-             blobCounter.ProcessImage(grayImage);
-             Blob[] blobs = blobCounter.GetObjectsInformation();
-
-             // create convex hull searching algorithm
-             GrahamConvexHull hullFinder = new GrahamConvexHull();
-
-             // lock image to draw on it
-             BitmapData data = grayImage.LockBits(
-                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
-                     ImageLockMode.ReadWrite, grayImage.PixelFormat);
-
-
-             // process each blob
-             foreach (Blob blob in blobs)
-             {
-                 List<IntPoint> leftPoints, rightPoints, edgePoints = default;
-
-                 // get blob's edge points
-                 blobCounter.GetBlobsLeftAndRightEdges(blob,
-                 out leftPoints, out rightPoints);
-
-                 edgePoints.AddRange(leftPoints);
-                 edgePoints.AddRange(rightPoints);
-
-                 // blob's convex hull
-                 List<IntPoint> hull = hullFinder.FindHull(edgePoints);
-
-                 Drawing.Polygon(data, hull, Color.Red);
-             }
-
-
-            grayImage.UnlockBits(data);
-            */
 
             BlobCounter blobCounter = new BlobCounter();
             blobCounter.ProcessImage(grayImage);
@@ -365,8 +290,8 @@ namespace ETVR
             this.blobWidthL.Text = Settings.Default["blobWidthL"].ToString();
             this.blobWidthR.Text = Settings.Default["blobWidthR"].ToString();
             
-            this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 100) - 1.8);
-            this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 100) - 1.8);
+            this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 180) - 1);
+            this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 180) - 1);
         }
         
         private void sliderL_MouseDown(object sender, MouseEventArgs e)
