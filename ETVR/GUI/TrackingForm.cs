@@ -28,6 +28,7 @@ using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
 using System.Net;
+using Aspose.Imaging.FileFormats.Emf.Emf.Records;
 
 namespace ETVR
 {
@@ -147,7 +148,7 @@ namespace ETVR
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
             //Store hull points
-            List<IntPoint> hull = default;
+            List<IntPoint> edgePoints = new List<IntPoint>();
 
             foreach (Blob blob in blobs)
             {
@@ -155,13 +156,13 @@ namespace ETVR
                 if (leftPoints.Count > 0 && rightPoints.Count > 0)
                 {
                     // get blob's edge points
-                    List<IntPoint> edgePoints = new List<IntPoint>();
+                    edgePoints = new List<IntPoint>();
                     edgePoints.AddRange(leftPoints);
                     edgePoints.AddRange(rightPoints);
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    hull = hullFinder.FindHull(edgePoints);
+                    List<IntPoint> hull = hullFinder.FindHull(edgePoints);
 
                     // create graphics and draw the hull
 
@@ -169,13 +170,25 @@ namespace ETVR
                 }
             }
 
-            if(hull.Count > 0)
+            //Get 
+            if(edgePoints.Count > 0)
             {
-                centerL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));
+                //centerL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
+                centerL = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));     //Blob average
             }
             
 
             grayImage.UnlockBits(data);
+
+            pictureBox8.Image = null;
+
+            using (var paint = new PaintEventArgs(pictureBox8.CreateGraphics(), pictureBox8.ClientRectangle))
+            {
+                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+                paint.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                pen.Dispose();
+                paint.Dispose();
+            }
 
             //post final
             pictureBox6.Image = grayImage;
@@ -274,37 +287,38 @@ namespace ETVR
 
             if (edgePoints.Count > 0)
             {
-                centerR = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));
+                //centerR = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
+                centerR = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));     //Blob average
             }
 
             grayImage.UnlockBits(data);
 
+            pictureBox7.Image = null;
+
+            using (var paintR = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
+            {
+                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+                paintR.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                pen.Dispose();
+                paintR.Dispose();
+            }
+            
             //post final
             pictureBox5.Image = grayImage;
         }
-        
-        private void pictureBox8_Paint(object sender, PaintEventArgs e)
+        //Draw Left tracked blob
+        public void pictureBox8_Paint(object sender,PaintEventArgs e)
         {
-            while (true)
-            {
-                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-                e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
-                pen.Dispose();
-                break;
-            }
-            this.Refresh();
+            Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+            e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+            pen.Dispose();
         }
-
+        //Draw Right tracked blob
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
-            while (true)
-            {
-                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-                e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
-                pen.Dispose();
-                break;
-            }
-            this.Refresh();
+            Pen pen = new Pen(System.Drawing.Color.Purple, 10);
+            e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+            pen.Dispose();
         }
         private void btnload_Click(object sender, EventArgs e)
         {
