@@ -31,6 +31,8 @@ using System.Net;
 using Aspose.Imaging.FileFormats.Emf.Emf.Records;
 using AForge.Video.DirectShow;
 using Aspose.Imaging.MemoryManagement;
+using Aspose.Imaging.FileFormats.Tiff.FileManagement;
+using Rug.Osc;
 
 namespace ETVR
 {
@@ -47,6 +49,15 @@ namespace ETVR
 
         System.Drawing.PointF centerL;
         System.Drawing.PointF centerR;
+        System.Drawing.PointF zero;
+        System.Drawing.PointF center;
+
+        List<IntPoint> edgePointsL = new List<IntPoint>();
+
+        bool blinkL = false;
+        bool blinkR = false;
+
+        OscSender sender;
 
         public TrackingForm()
         {
@@ -79,6 +90,50 @@ namespace ETVR
 
             stream1.Start();
             stream2.Start();
+
+            //OSC
+            IPAddress ip;
+            string ipString = Settings.Default["ip"].ToString();
+            int port = Settings.Default.port;
+            ip = IPAddress.Parse(ipString);
+
+            //New sender
+            sender = new OscSender(ip, port);
+
+            //Connect to socket
+            sender.Connect();
+        }
+
+        public void sendOsc(float lx, float ly, float rx, float ry, bool l, bool r)
+        {
+            /*IPAddress ip;
+            string ipString = Settings.Default["ip"].ToString();
+            int port = Settings.Default.port;
+            ip = IPAddress.Parse(ipString);
+
+            //New sender
+            sender = new OscSender(ip, port);
+
+            //Connect to socket
+            sender.Connect();
+            */
+
+            OscMessage LX = new OscMessage("/avatar/parameters/LeftX", lx);
+            OscMessage LY = new OscMessage("/avatar/parameters/LeftY", ly);
+            OscMessage RX = new OscMessage("/avatar/parameters/RightX", rx);
+            OscMessage RY = new OscMessage("/avatar/parameters/RightY", ry);
+            OscMessage LB = new OscMessage("/avatar/parameters/LeftBlink", l);
+            OscMessage RB = new OscMessage("/avatar/parameters/RightBlink", r);
+
+            sender.Send(LX);
+            sender.Send(LY);
+            sender.Send(RX);
+            sender.Send(RY);
+            sender.Send(LB);
+            sender.Send(RB);
+
+            //sender.Dispose();
+            //sender = null;
         }
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -100,7 +155,12 @@ namespace ETVR
             
             //Rotation
             RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationL, true);
+            rotation.FillColor = Color.White;
             grayImage = rotation.Apply(grayImage);
+
+            //Resize
+            ResizeBilinear resize = new ResizeBilinear(pictureBox1.Width, pictureBox1.Height);
+            grayImage = resize.Apply(grayImage);
 
             pictureBox1.Image = new Bitmap(grayImage);
             /* FILTERING *********************************************************************************/
@@ -150,50 +210,65 @@ namespace ETVR
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
             //Store hull points
-            List<IntPoint> edgePoints = new List<IntPoint>();
-
+            List<IntPoint> edgePointsL = new List<IntPoint>();
             foreach (Blob blob in blobs)
             {
                 blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
                 if (leftPoints.Count > 0 && rightPoints.Count > 0)
                 {
                     // get blob's edge points
-                    edgePoints = new List<IntPoint>();
-                    edgePoints.AddRange(leftPoints);
-                    edgePoints.AddRange(rightPoints);
+                    edgePointsL = new List<IntPoint>();
+                    edgePointsL.AddRange(leftPoints);
+                    edgePointsL.AddRange(rightPoints);
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    List<IntPoint> hull = hullFinder.FindHull(edgePoints);
+                    List<IntPoint> hull = hullFinder.FindHull(edgePointsL);
 
                     // create graphics and draw the hull
 
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-
-            //Get 
-            if(edgePoints.Count > 0)
+            PointF avgL = new PointF(0,0);
+            //Get average point
+            if (edgePointsL.Count > 0)
             {
-                //centerL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
-                centerL = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));     //Blob average
+                //PointF avgL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
+                avgL = new PointF((float)edgePointsL.Average(p => p.X), (float)edgePointsL.Average(p => p.Y));     //Blob average
             }
-            
+
+            centerL = new PointF(avgL.X - (centerL.X - zero.X), avgL.Y - (centerL.Y - zero.Y));
+            if (edgePointsL.Count < 5)
+            {
+                blinkL = true;
+            }
+            else blinkL = false;
 
             grayImage.UnlockBits(data);
-
+            
             pictureBox8.Image = null;
-
             using (var paint = new PaintEventArgs(pictureBox8.CreateGraphics(), pictureBox8.ClientRectangle))
             {
-                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-                paint.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
-                pen.Dispose();
-                paint.Dispose();
+                if (blinkL == true)
+                {
+                    paint.Graphics.FillRectangle(Brushes.Purple, pictureBox8.ClientRectangle);
+                    paint.Dispose();
+                }
+                else 
+                {
+                    Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
+                    paint.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+                    pen.Dispose();
+                    paint.Dispose();
+                }
             }
-
+            
             //post final
             pictureBox6.Image = grayImage;
+
+            //Send OSC
+            sendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -215,8 +290,13 @@ namespace ETVR
             
             //Rotation
             RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationR, true);
+            rotation.FillColor = Color.White;
             grayImage = rotation.Apply(grayImage);
-            
+
+            //Resize
+            ResizeBilinear resize = new ResizeBilinear(pictureBox1.Width, pictureBox1.Height);
+            grayImage = resize.Apply(grayImage);
+
             pictureBox2.Image = new Bitmap(grayImage);
             
             /* FILTERING *********************************************************************************/
@@ -265,7 +345,7 @@ namespace ETVR
                 new Rectangle(0, 0, grayImage.Width, grayImage.Height),
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
-            List<IntPoint> edgePoints = new List<IntPoint>();
+            List<IntPoint> edgePointsR = new List<IntPoint>();
 
             foreach (Blob blob in blobs)
             {
@@ -273,58 +353,97 @@ namespace ETVR
                 if (leftPoints.Count > 0 && rightPoints.Count > 0)
                 {
                     // get blob's edge points
-                    edgePoints = new List<IntPoint>();
-                    edgePoints.AddRange(leftPoints);
-                    edgePoints.AddRange(rightPoints);
+                    edgePointsR = new List<IntPoint>();
+                    edgePointsR.AddRange(leftPoints);
+                    edgePointsR.AddRange(rightPoints);
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    List<IntPoint> hull = hullFinder.FindHull(edgePoints);
+                    List<IntPoint> hull = hullFinder.FindHull(edgePointsR);
 
                     // create graphics and draw the hull
                     
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-
-            if (edgePoints.Count > 0)
+            PointF avgR = new PointF(0, 0);
+            //Get average point
+            if (edgePointsR.Count > 0)
             {
-                //centerR = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
-                centerR = new PointF((float)edgePoints.Average(p => p.X), (float)edgePoints.Average(p => p.Y));     //Blob average
+                //PointF avgL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
+                avgR = new PointF((float)edgePointsR.Average(p => p.X), (float)edgePointsR.Average(p => p.Y));     //Blob average
             }
+
+            if (edgePointsR.Count < 5)
+            {
+                blinkR = true;
+            }
+            else blinkR = false;
+            
+            centerR = new PointF(avgR.X - (centerR.X - zero.X), avgR.Y - (centerR.Y - zero.Y));
 
             grayImage.UnlockBits(data);
 
             pictureBox7.Image = null;
 
-            using (var paintR = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
+            using (var paint = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
             {
-                Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-                paintR.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
-                pen.Dispose();
-                paintR.Dispose();
+                if (blinkR == true)
+                {
+                    paint.Graphics.FillRectangle(Brushes.Purple, pictureBox7.ClientRectangle);
+                    paint.Dispose();
+                }
+                else
+                {
+                    Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
+                    paint.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                    pen.Dispose();
+                    paint.Dispose();
+                }
             }
-            
+
             //post final
             pictureBox5.Image = grayImage;
+
+            //Send OSC
+            sendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
         //Draw Left tracked blob
         public void pictureBox8_Paint(object sender,PaintEventArgs e)
         {
-            Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-            e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
-            pen.Dispose();
+            if (blinkL == true)
+            {
+                e.Graphics.FillRectangle(Brushes.Purple, pictureBox8.ClientRectangle);
+                e.Dispose();
+            }
+            else
+            {
+                Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
+                e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+                pen.Dispose();
+                e.Dispose();
+            }
         }
         //Draw Right tracked blob
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
-            Pen pen = new Pen(System.Drawing.Color.Purple, 10);
-            e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
-            pen.Dispose();
+            if (blinkR == true)
+            {
+                e.Graphics.FillRectangle(Brushes.Purple, pictureBox7.ClientRectangle);
+                e.Dispose();
+            }
+            else
+            {
+                Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
+                e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                pen.Dispose();
+                e.Dispose();
+            }
         }
         private void btnload_Click(object sender, EventArgs e)
         {
-            
+            zero = centerL;
+            center = new PointF(pictureBox8.Width / 2, pictureBox8.Height / 2);
         }
 
         private void TrackingForm_Load(object sender, EventArgs e)

@@ -32,8 +32,11 @@
             this.boxR = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.boxL = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnset = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.addressBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.portBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label2
@@ -76,18 +79,6 @@
             this.boxL.TabIndex = 4;
             this.boxL.Text = "http://192.168.1.xx/";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.Location = new System.Drawing.Point(12, 96);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Verbose";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // btnset
             // 
             this.btnset.BackColor = System.Drawing.Color.Purple;
@@ -95,7 +86,7 @@
             this.btnset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.btnset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.btnset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnset.Location = new System.Drawing.Point(187, 46);
+            this.btnset.Location = new System.Drawing.Point(11, 183);
             this.btnset.Name = "btnset";
             this.btnset.Size = new System.Drawing.Size(64, 23);
             this.btnset.TabIndex = 9;
@@ -104,14 +95,57 @@
             this.btnset.UseVisualStyleBackColor = false;
             this.btnset.Click += new System.EventHandler(this.btnset_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(12, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 15);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "OSC Address";
+            // 
+            // addressBox
+            // 
+            this.addressBox.Location = new System.Drawing.Point(11, 113);
+            this.addressBox.Name = "addressBox";
+            this.addressBox.Size = new System.Drawing.Size(170, 20);
+            this.addressBox.TabIndex = 10;
+            this.addressBox.Text = "127.0.0.1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(12, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 15);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "OSC Port";
+            // 
+            // portBox
+            // 
+            this.portBox.Location = new System.Drawing.Point(11, 157);
+            this.portBox.Name = "portBox";
+            this.portBox.Size = new System.Drawing.Size(170, 20);
+            this.portBox.TabIndex = 12;
+            this.portBox.Text = "9000";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 550);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.portBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.addressBox);
             this.Controls.Add(this.btnset);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.boxR);
             this.Controls.Add(this.label1);
@@ -131,7 +165,10 @@
         public System.Windows.Forms.TextBox boxR;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox boxL;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnset;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox addressBox;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.TextBox portBox;
     }
 }

@@ -93,17 +93,17 @@
             // 
             // btnload
             // 
-            this.btnload.BackColor = System.Drawing.Color.Gray;
-            this.btnload.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnload.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnload.FlatAppearance.BorderSize = 0;
-            this.btnload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.btnload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.btnload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Purple;
+            this.btnload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Fuchsia;
             this.btnload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnload.Location = new System.Drawing.Point(13, 13);
             this.btnload.Name = "btnload";
             this.btnload.Size = new System.Drawing.Size(75, 23);
             this.btnload.TabIndex = 3;
-            this.btnload.Text = "Reload";
+            this.btnload.Text = "Center";
             this.btnload.UseVisualStyleBackColor = false;
             this.btnload.Click += new System.EventHandler(this.btnload_Click);
             // 
