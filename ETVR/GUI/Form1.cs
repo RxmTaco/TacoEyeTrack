@@ -1,4 +1,5 @@
 ﻿using AForge.Video;
+using ETVR.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +64,7 @@ namespace ETVR
         private void btnclose_Click(object sender, EventArgs e)
         {
             //Application exit
+
             Application.ExitThread();
             Thread.Sleep(100);
             Application.Exit();
@@ -71,6 +73,7 @@ namespace ETVR
         private void btnhide_Click(object sender, EventArgs e)
         {
             //Window minimize to task bar
+
             this.WindowState = FormWindowState.Minimized;
         }
         

@@ -2,6 +2,7 @@
 using AForge.Controls;
 using AForge.Imaging;
 using AForge.Video;
+using AForge.Video.DirectShow;
 using ETVR.Properties;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,10 @@ using System.Data;
 using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,16 +39,36 @@ namespace ETVR
         System.Drawing.Point endPointR;
         System.Drawing.Point startPointR;
 
+        public string url1;
+        public string url2;
+
         public CroppingForm()
         {
             InitializeComponent();
 
+            if (Settings.Default.urlL.Length == 0)
+            {
+                url1 = "No Source";
+            }
+            else
+            {
+                url1 = Settings.Default["urlL"].ToString();
+            }
+
+            if (Settings.Default.urlR.Length == 0)
+            {
+                url2 = "No Source";
+            }
+            else
+            {
+                url2 = Settings.Default["urlR"].ToString();
+            }
+
             //Start stream
-            stream1 = new MJPEGStream(Settings.Default["urlL"].ToString());
+            stream1 = new MJPEGStream(url1);
             stream1.NewFrame += playerControl1_NewFrame;
 
-
-            stream2 = new MJPEGStream(Settings.Default["urlR"].ToString());
+            stream2 = new MJPEGStream(url2);
             stream2.NewFrame += playerControl2_NewFrame;
 
             stream1.Start();
@@ -53,6 +77,7 @@ namespace ETVR
 
         public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            
             //Image from stream
             bmp = (Bitmap)eventArgs.Frame.Clone();
 
@@ -113,6 +138,7 @@ namespace ETVR
                 int y = b.Height * e.Y / pictureBox1.Height;
                 startPointL = new System.Drawing.Point(x, y);
                 Settings.Default.startPointL = startPointL;
+                Settings.Default.Save();
             }
         }
         
@@ -126,6 +152,7 @@ namespace ETVR
                 int y = b.Height * e.Y / pictureBox1.Height;
                 endPointL = new System.Drawing.Point(x, y);
                 Settings.Default.endPointL = endPointL;
+                Settings.Default.Save();
                 break;
             }
         }
@@ -140,6 +167,7 @@ namespace ETVR
                 int y = b.Height * e.Y / pictureBox2.Height;
                 startPointR = new System.Drawing.Point(x, y);
                 Settings.Default.startPointR = startPointR;
+                Settings.Default.Save();
             }
         }
 
@@ -153,6 +181,7 @@ namespace ETVR
                 int y = b.Height * e.Y / pictureBox2.Height;
                 endPointR = new System.Drawing.Point(x, y);
                 Settings.Default.endPointR = endPointR;
+                Settings.Default.Save();
                 break;
             }
         }
@@ -180,5 +209,6 @@ namespace ETVR
         {
             onBox1 = false;
         }
+        
     }
 }

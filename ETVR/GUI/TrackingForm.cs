@@ -29,6 +29,8 @@ using System.Drawing.Imaging;
 using AForge.Math.Random;
 using System.Net;
 using Aspose.Imaging.FileFormats.Emf.Emf.Records;
+using AForge.Video.DirectShow;
+using Aspose.Imaging.MemoryManagement;
 
 namespace ETVR
 {
@@ -50,8 +52,8 @@ namespace ETVR
         {
             //Begin stream
             InitializeComponent();
-
-            if(Settings.Default.urlL.Length == 0)
+            
+            if (Settings.Default.urlL.Length == 0)
             {
                 url = "No Source";
             }
@@ -322,6 +324,7 @@ namespace ETVR
         }
         private void btnload_Click(object sender, EventArgs e)
         {
+            
         }
 
         private void TrackingForm_Load(object sender, EventArgs e)
