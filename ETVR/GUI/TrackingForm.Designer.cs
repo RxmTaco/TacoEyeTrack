@@ -59,6 +59,8 @@
             this.rotateSliderL = new AForge.Controls.SliderControl();
             this.rotateSliderR = new AForge.Controls.SliderControl();
             this.pictureBox7 = new AForge.Controls.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -448,12 +450,34 @@
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox7_Paint);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(13, 525);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 13);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Left";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(413, 525);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Right";
+            // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(820, 550);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.rotateSliderR);
             this.Controls.Add(this.rotateSliderL);
             this.Controls.Add(this.pictureBox5);
@@ -534,5 +558,7 @@
         private AForge.Controls.SliderControl rotateSliderL;
         private AForge.Controls.SliderControl rotateSliderR;
         private AForge.Controls.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -49,7 +49,10 @@ namespace ETVR
 
         System.Drawing.PointF centerL;
         System.Drawing.PointF centerR;
-        System.Drawing.PointF zero;
+        System.Drawing.PointF zeroL;
+        System.Drawing.PointF zeroR;
+        System.Drawing.PointF avgL;
+        System.Drawing.PointF avgR;
         System.Drawing.PointF center;
 
         List<IntPoint> edgePointsL = new List<IntPoint>();
@@ -104,7 +107,7 @@ namespace ETVR
             sender.Connect();
         }
 
-        public void sendOsc(float lx, float ly, float rx, float ry, bool l, bool r)
+        public void SendOsc(float lx, float ly, float rx, float ry, bool l, bool r)
         {
             /*IPAddress ip;
             string ipString = Settings.Default["ip"].ToString();
@@ -230,15 +233,15 @@ namespace ETVR
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-            PointF avgL = new PointF(0,0);
+            //PointF avgL = new PointF(0,0);
             //Get average point
             if (edgePointsL.Count > 0)
             {
-                //PointF avgL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
-                avgL = new PointF((float)edgePointsL.Average(p => p.X), (float)edgePointsL.Average(p => p.Y));     //Blob average
+                //avgL = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));                  //Hull average
+                avgL = new PointF((float)edgePointsL.Average(p => p.X), (float)edgePointsL.Average(p => p.Y));      //Blob average
             }
-
-            centerL = new PointF(avgL.X - (centerL.X - zero.X), avgL.Y - (centerL.Y - zero.Y));
+            
+            centerL = new PointF(avgL.X - zeroL.X + center.X, avgL.Y - zeroL.Y + center.Y);
             if (edgePointsL.Count < 5)
             {
                 blinkL = true;
@@ -268,7 +271,7 @@ namespace ETVR
             pictureBox6.Image = grayImage;
 
             //Send OSC
-            sendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
+            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -366,12 +369,12 @@ namespace ETVR
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-            PointF avgR = new PointF(0, 0);
+            //PointF avgR = new PointF(0, 0);
             //Get average point
             if (edgePointsR.Count > 0)
             {
-                //PointF avgL = new System.Drawing.PointF((float)hull.Average(p=>p.X), (float)hull.Average(p => p.Y));  //Hull average
-                avgR = new PointF((float)edgePointsR.Average(p => p.X), (float)edgePointsR.Average(p => p.Y));     //Blob average
+                //PointF avgR = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));           //Hull average
+                avgR = new PointF((float)edgePointsR.Average(p => p.X), (float)edgePointsR.Average(p => p.Y));      //Blob average
             }
 
             if (edgePointsR.Count < 5)
@@ -380,10 +383,10 @@ namespace ETVR
             }
             else blinkR = false;
             
-            centerR = new PointF(avgR.X - (centerR.X - zero.X), avgR.Y - (centerR.Y - zero.Y));
+            centerR = new PointF(avgR.X - zeroR.X + center.X, avgR.Y - zeroR.Y + center.Y);
 
             grayImage.UnlockBits(data);
-
+            
             pictureBox7.Image = null;
 
             using (var paint = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
@@ -406,7 +409,7 @@ namespace ETVR
             pictureBox5.Image = grayImage;
 
             //Send OSC
-            sendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
+            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
         //Draw Left tracked blob
         public void pictureBox8_Paint(object sender,PaintEventArgs e)
@@ -442,15 +445,23 @@ namespace ETVR
         }
         private void btnload_Click(object sender, EventArgs e)
         {
-            zero = centerL;
+            zeroL = avgL;
+            zeroR = avgR;
             center = new PointF(pictureBox8.Width / 2, pictureBox8.Height / 2);
-        }
 
+
+            this.label5.Text = "X: " + centerL.X.ToString() + "Y: " + centerL.Y.ToString();
+            this.label6.Text = "X: " + centerR.X.ToString() + "Y: " + centerR.Y.ToString();
+        }
+        
         private void TrackingForm_Load(object sender, EventArgs e)
         {
             //Load all variables from settings
             this.urlL.Text = url;
             this.urlR.Text = url2;
+
+            this.label5.Text = "X: " + centerL.X.ToString() + "Y: " + centerL.Y.ToString();
+            this.label6.Text = "X: " + centerR.X.ToString() + "Y: " + centerR.Y.ToString();
 
             this.sliderL.ManipulatorPosition = Settings.Default.sliderL;
             this.sliderR.ManipulatorPosition = Settings.Default.sliderR;
