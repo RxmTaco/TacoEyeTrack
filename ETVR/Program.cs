@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
+using AForge;
 using AForge.Video;
 using ETVR.Properties;
 

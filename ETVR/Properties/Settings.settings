@@ -42,10 +42,10 @@
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="endPointL" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">100, 100</Value>
     </Setting>
     <Setting Name="endPointR" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">100, 100</Value>
     </Setting>
     <Setting Name="ip" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>

@@ -120,14 +120,15 @@ namespace ETVR
             //Connect to socket
             sender.Connect();
             */
-
-            OscMessage LX = new OscMessage("/avatar/parameters/LeftX", lx);
-            OscMessage LY = new OscMessage("/avatar/parameters/LeftY", ly);
-            OscMessage RX = new OscMessage("/avatar/parameters/RightX", rx);
-            OscMessage RY = new OscMessage("/avatar/parameters/RightY", ry);
-            OscMessage LB = new OscMessage("/avatar/parameters/LeftBlink", l);
-            OscMessage RB = new OscMessage("/avatar/parameters/RightBlink", r);
-
+            
+            float c = 100.0f; //Scale factor, original coordinate range is 0-200, this case scaling to -100 to 100
+            OscMessage LX = new OscMessage("/avatar/parameters/LeftEyeX", (lx - c) / 100);
+            OscMessage LY = new OscMessage("/avatar/parameters/LeftEyeY", (ly - c) / 100);
+            OscMessage RX = new OscMessage("/avatar/parameters/RightEyeX", (rx - c) / 100);
+            OscMessage RY = new OscMessage("/avatar/parameters/RightEyeY", (ry - c) / 100);
+            OscMessage LB = new OscMessage("/avatar/parameters/LeftEyeLid", l);
+            OscMessage RB = new OscMessage("/avatar/parameters/RightEyeLid", r);
+            
             sender.Send(LX);
             sender.Send(LY);
             sender.Send(RX);
@@ -271,7 +272,7 @@ namespace ETVR
             pictureBox6.Image = grayImage;
 
             //Send OSC
-            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
+            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkR, blinkR);
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
