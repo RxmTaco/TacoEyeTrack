@@ -195,7 +195,7 @@ namespace ETVR
 
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
-            filter.CoupledSizeFiltering = true;
+            filter.CoupledSizeFiltering = false;
             filter.MinWidth = (int)((WidthL.ManipulatorPosition + 1) * 100);
             filter.MinHeight = (int)((HeightL.ManipulatorPosition + 1) * 100);
             filter.ApplyInPlace(grayImage);
@@ -331,7 +331,7 @@ namespace ETVR
 
             //*Blob size filtering
             BlobsFiltering filter = new BlobsFiltering();
-            filter.CoupledSizeFiltering = true;
+            filter.CoupledSizeFiltering = false;
             filter.MinWidth = (int)((WidthR.ManipulatorPosition + 1) * 100);
             filter.MinHeight = (int)((HeightR.ManipulatorPosition + 1) * 100);
             filter.ApplyInPlace(grayImage);
