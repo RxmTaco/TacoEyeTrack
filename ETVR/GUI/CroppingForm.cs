@@ -131,7 +131,7 @@ namespace ETVR
         public void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Get start point
-            if ((e.Button == MouseButtons.Left) && (onBox1 == true))
+            if ((e.Button == MouseButtons.Left) && (onBox1 == true) && pictureBox1.Image != null)
             {
                 System.Drawing.Image b = pictureBox1.Image;
                 int x = b.Width * e.X / pictureBox1.Width;
@@ -145,7 +145,7 @@ namespace ETVR
         private void pictureBox1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Track end point
-            while ((e.Button == MouseButtons.Left) && (onBox1 == true))
+            while ((e.Button == MouseButtons.Left) && (onBox1 == true) && pictureBox1.Image != null)
             {
                 System.Drawing.Image b = pictureBox1.Image;
                 int x = b.Width * e.X / pictureBox1.Width;
@@ -160,7 +160,7 @@ namespace ETVR
         private void pictureBox2_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Get start point
-            if ((e.Button == MouseButtons.Left) && (onBox2 == true))
+            if ((e.Button == MouseButtons.Left) && (onBox2 == true) && pictureBox2.Image != null)
             {
                 System.Drawing.Image b = pictureBox2.Image;
                 int x = b.Width * e.X / pictureBox2.Width;
@@ -174,7 +174,7 @@ namespace ETVR
         private void pictureBox2_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Track end point
-            while ((e.Button == MouseButtons.Left) && (onBox2 == true))
+            while ((e.Button == MouseButtons.Left) && (onBox2 == true) && pictureBox2.Image != null)
             {
                 System.Drawing.Image b = pictureBox2.Image;
                 int x = b.Width * e.X / pictureBox2.Width;

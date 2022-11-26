@@ -160,6 +160,7 @@
             this.Name = "EyeTrackVR";
             this.Text = "EyeTrackVR";
             this.Load += new System.EventHandler(this.EyeTrackVR_Load);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.EyeTrackVR_ControlRemoved);
             this.HeaderPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -33,6 +33,7 @@ using AForge.Video.DirectShow;
 using Aspose.Imaging.MemoryManagement;
 using Aspose.Imaging.FileFormats.Tiff.FileManagement;
 using Rug.Osc;
+using System.Diagnostics;
 
 namespace ETVR
 {
@@ -57,8 +58,8 @@ namespace ETVR
 
         List<IntPoint> edgePointsL = new List<IntPoint>();
 
-        bool blinkL = false;
-        bool blinkR = false;
+        int blinkL = 0;
+        int blinkR = 0;
 
         OscSender sender;
 
@@ -107,7 +108,7 @@ namespace ETVR
             sender.Connect();
         }
 
-        public void SendOsc(float lx, float ly, float rx, float ry, bool l, bool r)
+        public void SendOsc(float lx, float ly, float rx, float ry, int l, int r)
         {
             /*IPAddress ip;
             string ipString = Settings.Default["ip"].ToString();
@@ -245,16 +246,16 @@ namespace ETVR
             centerL = new PointF(avgL.X - zeroL.X + center.X, avgL.Y - zeroL.Y + center.Y);
             if (edgePointsL.Count < 5)
             {
-                blinkL = true;
+                blinkL = 1;
             }
-            else blinkL = false;
+            else blinkL = 0;
 
             grayImage.UnlockBits(data);
             
             pictureBox8.Image = null;
             using (var paint = new PaintEventArgs(pictureBox8.CreateGraphics(), pictureBox8.ClientRectangle))
             {
-                if (blinkL == true)
+                if (blinkL == 1)
                 {
                     paint.Graphics.FillRectangle(Brushes.Purple, pictureBox8.ClientRectangle);
                     paint.Dispose();
@@ -272,7 +273,7 @@ namespace ETVR
             pictureBox6.Image = grayImage;
 
             //Send OSC
-            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkR, blinkR);
+            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
 
         public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -380,9 +381,9 @@ namespace ETVR
 
             if (edgePointsR.Count < 5)
             {
-                blinkR = true;
+                blinkR = 1;
             }
-            else blinkR = false;
+            else blinkR = 0;
             
             centerR = new PointF(avgR.X - zeroR.X + center.X, avgR.Y - zeroR.Y + center.Y);
 
@@ -392,7 +393,7 @@ namespace ETVR
 
             using (var paint = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
             {
-                if (blinkR == true)
+                if (blinkR == 1)
                 {
                     paint.Graphics.FillRectangle(Brushes.Purple, pictureBox7.ClientRectangle);
                     paint.Dispose();
@@ -415,7 +416,7 @@ namespace ETVR
         //Draw Left tracked blob
         public void pictureBox8_Paint(object sender,PaintEventArgs e)
         {
-            if (blinkL == true)
+            if (blinkL == 1)
             {
                 e.Graphics.FillRectangle(Brushes.Purple, pictureBox8.ClientRectangle);
                 e.Dispose();
@@ -431,7 +432,7 @@ namespace ETVR
         //Draw Right tracked blob
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
-            if (blinkR == true)
+            if (blinkR == 1)
             {
                 e.Graphics.FillRectangle(Brushes.Purple, pictureBox7.ClientRectangle);
                 e.Dispose();

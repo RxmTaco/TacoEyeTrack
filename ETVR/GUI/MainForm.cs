@@ -38,6 +38,7 @@ namespace ETVR
             //Load forms into main panel view
             if (this.MainPanel.Controls.Count > 0)
                 this.MainPanel.Controls.RemoveAt(0);
+            
             Form f = Form as Form;
             f.TopLevel = false;
             f.Dock= DockStyle.Fill;
@@ -64,9 +65,9 @@ namespace ETVR
         private void btnclose_Click(object sender, EventArgs e)
         {
             //Application exit
-
             Application.ExitThread();
             Thread.Sleep(100);
+            Environment.Exit(Environment.ExitCode);
             Application.Exit();
         }
 
@@ -90,6 +91,11 @@ namespace ETVR
         private void HeaderPanel_MouseDown(object sender, MouseEventArgs e)
         {
             lastPoint = new Point(e.X, e.Y);
+        }
+
+        private void EyeTrackVR_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            
         }
     }
 }
