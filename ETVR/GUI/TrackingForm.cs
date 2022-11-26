@@ -23,7 +23,7 @@ using AForge.Imaging.Filters;
 using AForge.Math.Geometry;
 using AForge.Math;
 using AForge.Video;
-using ETVR.Properties;
+using TacoEyeTrack.Properties;
 using System.Windows.Data;
 using System.Drawing.Imaging;
 using AForge.Math.Random;
@@ -35,7 +35,7 @@ using Aspose.Imaging.FileFormats.Tiff.FileManagement;
 using Rug.Osc;
 using System.Diagnostics;
 
-namespace ETVR
+namespace TacoEyeTrack
 {
     public partial class TrackingForm : Form
     {

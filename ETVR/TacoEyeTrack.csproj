@@ -9,8 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6A413146-3DA2-45EC-B848-9BA57CF43808}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ETVR</RootNamespace>
-    <AssemblyName>ETVR</AssemblyName>
+    <RootNamespace>TacoEyeTrack</RootNamespace>
+    <AssemblyName>TacoEyeTrack</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

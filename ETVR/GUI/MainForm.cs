@@ -1,5 +1,5 @@
 ﻿using AForge.Video;
-using ETVR.Properties;
+using TacoEyeTrack.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +14,11 @@ using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
-namespace ETVR
+namespace TacoEyeTrack
 {
-    public partial class EyeTrackVR : Form
+    public partial class EyeTracker : Form
     {
-        public EyeTrackVR()
+        public EyeTracker()
         {
             InitializeComponent();
         }

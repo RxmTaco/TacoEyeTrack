@@ -11,9 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using AForge;
 using AForge.Video;
-using ETVR.Properties;
+using TacoEyeTrack.Properties;
 
-namespace ETVR
+namespace TacoEyeTrack
 {
     internal static class Program
     {
@@ -26,7 +26,7 @@ namespace ETVR
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EyeTrackVR());
+            Application.Run(new EyeTracker());
 
             /*
             Stream s = new Stream();

@@ -1,6 +1,6 @@
-﻿namespace ETVR
+﻿namespace TacoEyeTrack
 {
-    partial class EyeTrackVR
+    partial class EyeTracker
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EyeTrackVR));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EyeTracker));
             this.MainPanel = new System.Windows.Forms.Panel();
             this.HeaderPanel = new System.Windows.Forms.Panel();
             this.btnclose = new System.Windows.Forms.Button();
@@ -145,7 +145,7 @@
             this.btnsettings.UseVisualStyleBackColor = false;
             this.btnsettings.Click += new System.EventHandler(this.btnsettings_Click);
             // 
-            // EyeTrackVR
+            // EyeTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -157,8 +157,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "EyeTrackVR";
-            this.Text = "EyeTrackVR";
+            this.Name = "EyeTracker";
+            this.Text = "TacoEyeTrack";
             this.Load += new System.EventHandler(this.EyeTrackVR_Load);
             this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.EyeTrackVR_ControlRemoved);
             this.HeaderPanel.ResumeLayout(false);

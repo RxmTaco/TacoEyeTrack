@@ -1,4 +1,4 @@
-﻿namespace ETVR
+﻿namespace TacoEyeTrack
 {
     partial class SettingsForm
     {

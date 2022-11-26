@@ -3,7 +3,7 @@ using AForge.Controls;
 using AForge.Imaging;
 using AForge.Video;
 using AForge.Video.DirectShow;
-using ETVR.Properties;
+using TacoEyeTrack.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +22,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace ETVR
+namespace TacoEyeTrack
 {
     public partial class CroppingForm : Form
     {

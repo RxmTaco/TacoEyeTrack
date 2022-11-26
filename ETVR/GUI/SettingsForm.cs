@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
-using ETVR.Properties;
+using TacoEyeTrack.Properties;
 
-namespace ETVR
+namespace TacoEyeTrack
 {
     public partial class SettingsForm : Form
     {
