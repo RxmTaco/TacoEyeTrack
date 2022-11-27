@@ -1,39 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using System.Windows.Shell;
-using AForge;
-using AForge.Controls;
+﻿using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math.Geometry;
-using AForge.Math;
 using AForge.Video;
-using TacoEyeTrack.Properties;
-using System.Windows.Data;
-using System.Drawing.Imaging;
-using AForge.Math.Random;
-using System.Net;
-using Aspose.Imaging.FileFormats.Emf.Emf.Records;
-using AForge.Video.DirectShow;
-using Aspose.Imaging.MemoryManagement;
-using Aspose.Imaging.FileFormats.Tiff.FileManagement;
 using Rug.Osc;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Net;
+using System.Windows.Forms;
+using TacoEyeTrack.Properties;
 
 namespace TacoEyeTrack
 {
@@ -56,8 +34,6 @@ namespace TacoEyeTrack
         System.Drawing.PointF avgR;
         System.Drawing.PointF center;
 
-        List<IntPoint> edgePointsL = new List<IntPoint>();
-
         int blinkL = 0;
         int blinkR = 0;
 
@@ -65,32 +41,25 @@ namespace TacoEyeTrack
 
         public TrackingForm()
         {
-            //Begin stream
             InitializeComponent();
-            
-            if (Settings.Default.urlL.Length == 0)
-            {
-                url = "No Source";
-            }
-            else
-            {
-                url = Settings.Default["urlL"].ToString();
-            }
 
-            stream1 = new MJPEGStream(url);
-            stream1.NewFrame += playerControl1_NewFrame;
+            //Get urls
+            if (Settings.Default.urlL.Length == 0)
+                url = "No Source";
+            else
+                url = Settings.Default["urlL"].ToString();
 
             if (Settings.Default.urlR.Length == 0)
-            {
                 url2 = "No Source";
-            }
             else
-            {
                 url2 = Settings.Default["urlR"].ToString();
-            }
+
+            //Start stream
+            stream1 = new MJPEGStream(url);
+            stream1.NewFrame += PlayerControl1_NewFrame;
 
             stream2 = new MJPEGStream(url2);
-            stream2.NewFrame += playerControl2_NewFrame;
+            stream2.NewFrame += PlayerControl2_NewFrame;
 
             stream1.Start();
             stream2.Start();
@@ -108,7 +77,7 @@ namespace TacoEyeTrack
             sender.Connect();
         }
 
-        public void SendOsc(float lx, float ly, float rx, float ry, int l, int r)
+        public void SendOsc(float lx, float ly, float rx, float ry, int lb, int rb)
         {
             /*IPAddress ip;
             string ipString = Settings.Default["ip"].ToString();
@@ -121,15 +90,20 @@ namespace TacoEyeTrack
             //Connect to socket
             sender.Connect();
             */
-            
-            float c = 100.0f; //Scale factor, original coordinate range is 0-200, this case scaling to -100 to 100
-            OscMessage LX = new OscMessage("/avatar/parameters/LeftEyeX", (lx - c) / 100);
-            OscMessage LY = new OscMessage("/avatar/parameters/LeftEyeY", (ly - c) / 100);
-            OscMessage RX = new OscMessage("/avatar/parameters/RightEyeX", (rx - c) / 100);
-            OscMessage RY = new OscMessage("/avatar/parameters/RightEyeY", (ry - c) / 100);
-            OscMessage LB = new OscMessage("/avatar/parameters/LeftEyeLid", l);
-            OscMessage RB = new OscMessage("/avatar/parameters/RightEyeLid", r);
-            
+
+            int c = 100; //map range
+            OscMessage LX = new OscMessage("/avatar/parameters/LeftEyeX", (lx - c) / c); 
+            OscMessage LY = new OscMessage("/avatar/parameters/LeftEyeY", (ly - c) / c);
+            OscMessage RX = new OscMessage("/avatar/parameters/RightEyeX", (rx - c) / c);
+            OscMessage RY = new OscMessage("/avatar/parameters/RightEyeY", (ry - c) / c);
+            OscMessage LB = new OscMessage("/avatar/parameters/LeftEyeLid", lb);
+            OscMessage RB = new OscMessage("/avatar/parameters/RightEyeLid", rb);
+            /*
+            Console.Write("LX" + (lx - c) / c + " | " + lx + " | ");
+            Console.Write("LY" + (ly - c) / c + " | " + ly + " | ");
+            Console.Write("RX" + (rx - c) / c + " | " + rx + " | ");
+            Console.WriteLine("RY" + (ry - c) / c + " | " + ry + " | ");
+            */
             sender.Send(LX);
             sender.Send(LY);
             sender.Send(RX);
@@ -141,23 +115,23 @@ namespace TacoEyeTrack
             //sender = null;
         }
 
-        public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void PlayerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Get images from stream
             bmp1 = (Bitmap)eventArgs.Frame.Clone();
 
             //Cropping
             Crop crop = new Crop(new Rectangle(
-                Settings.Default.startPointL.X,
-                Settings.Default.startPointL.Y,
-                Settings.Default.endPointL.X - Settings.Default.startPointL.X,
-                Settings.Default.endPointL.Y - Settings.Default.startPointL.Y));
+            Settings.Default.startPointL.X,
+            Settings.Default.startPointL.Y,
+            Settings.Default.endPointL.X - Settings.Default.startPointL.X,
+            Settings.Default.endPointL.Y - Settings.Default.startPointL.Y));
             Bitmap newImage = crop.Apply(bmp1);
 
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
             Bitmap grayImage = grayscale.Apply(newImage);
-            
+
             //Rotation
             RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationL, true);
             rotation.FillColor = Color.White;
@@ -180,7 +154,7 @@ namespace TacoEyeTrack
             AdditiveNoise filter = new AdditiveNoise(generator);
             filter.ApplyInPlace(grayImage);
             */
-            
+
             //Thresholding
             int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
@@ -216,6 +190,7 @@ namespace TacoEyeTrack
 
             //Store hull points
             List<IntPoint> edgePointsL = new List<IntPoint>();
+            List<IntPoint> hull = new List<IntPoint>();
             foreach (Blob blob in blobs)
             {
                 blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
@@ -228,30 +203,32 @@ namespace TacoEyeTrack
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    List<IntPoint> hull = hullFinder.FindHull(edgePointsL);
+                    hull = hullFinder.FindHull(edgePointsL);
 
                     // create graphics and draw the hull
 
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-            //PointF avgL = new PointF(0,0);
+            
             //Get average point
             if (edgePointsL.Count > 0)
             {
-                //avgL = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));                  //Hull average
-                avgL = new PointF((float)edgePointsL.Average(p => p.X), (float)edgePointsL.Average(p => p.Y));      //Blob average
+                if (Settings.Default.blobMode == true) //Check wether hull tracking mode is enabled
+                    avgL = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));                    //Hull average
+                else
+                    avgL = new PointF((float)edgePointsL.Average(p => p.X), (float)edgePointsL.Average(p => p.Y));      //Blob average
             }
+            
+            if (edgePointsL.Count < 5) //Check blink state
+                blinkL = 1;
+            else 
+                blinkL = 0;
             
             centerL = new PointF(avgL.X - zeroL.X + center.X, avgL.Y - zeroL.Y + center.Y);
-            if (edgePointsL.Count < 5)
-            {
-                blinkL = 1;
-            }
-            else blinkL = 0;
-
-            grayImage.UnlockBits(data);
             
+            grayImage.UnlockBits(data);
+
             pictureBox8.Image = null;
             using (var paint = new PaintEventArgs(pictureBox8.CreateGraphics(), pictureBox8.ClientRectangle))
             {
@@ -260,15 +237,15 @@ namespace TacoEyeTrack
                     paint.Graphics.FillRectangle(Brushes.Purple, pictureBox8.ClientRectangle);
                     paint.Dispose();
                 }
-                else 
+                else
                 {
                     Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                    paint.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+                    paint.Graphics.DrawEllipse(pen, centerL.X - 20, centerL.Y - 20, 40, 40);
                     pen.Dispose();
                     paint.Dispose();
                 }
             }
-            
+
             //post final
             pictureBox6.Image = grayImage;
 
@@ -276,23 +253,23 @@ namespace TacoEyeTrack
             SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
 
-        public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void PlayerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Get images from stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
 
             //Cropping
             Crop crop = new Crop(new Rectangle(
-                Settings.Default.startPointR.X,
-                Settings.Default.startPointR.Y,
-                Settings.Default.endPointR.X - Settings.Default.startPointR.X,
-                Settings.Default.endPointR.Y - Settings.Default.startPointR.Y));
+            Settings.Default.startPointR.X,
+            Settings.Default.startPointR.Y,
+            Settings.Default.endPointR.X - Settings.Default.startPointR.X,
+            Settings.Default.endPointR.Y - Settings.Default.startPointR.Y));
             Bitmap newImage = crop.Apply(bmp2);
 
             //Grayscale filter (BT709)
             Grayscale grayscale = new Grayscale(0.2125, 0.7154, 0.0721);
             Bitmap grayImage = grayscale.Apply(newImage);
-            
+
             //Rotation
             RotateBicubic rotation = new RotateBicubic(Settings.Default.rotationR, true);
             rotation.FillColor = Color.White;
@@ -303,7 +280,7 @@ namespace TacoEyeTrack
             grayImage = resize.Apply(grayImage);
 
             pictureBox2.Image = new Bitmap(grayImage);
-            
+
             /* FILTERING *********************************************************************************/
 
             /*Gamma
@@ -316,7 +293,7 @@ namespace TacoEyeTrack
             AdditiveNoise filter = new AdditiveNoise(generator);
             filter.ApplyInPlace(grayImage);
             */
-            
+
             //Thresholding
             int rounded = (int)Math.Round((sliderR.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
@@ -351,6 +328,7 @@ namespace TacoEyeTrack
                 ImageLockMode.ReadWrite, grayImage.PixelFormat);
 
             List<IntPoint> edgePointsR = new List<IntPoint>();
+            List<IntPoint> hull = new List<IntPoint>();
 
             foreach (Blob blob in blobs)
             {
@@ -364,31 +342,32 @@ namespace TacoEyeTrack
 
                     // blob's convex hull
                     GrahamConvexHull hullFinder = new GrahamConvexHull();
-                    List<IntPoint> hull = hullFinder.FindHull(edgePointsR);
+                    hull = hullFinder.FindHull(edgePointsR);
 
                     // create graphics and draw the hull
-                    
+
                     Drawing.Polygon(data, hull, Color.White);
                 }
             }
-            //PointF avgR = new PointF(0, 0);
+            
             //Get average point
             if (edgePointsR.Count > 0)
             {
-                //PointF avgR = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));           //Hull average
-                avgR = new PointF((float)edgePointsR.Average(p => p.X), (float)edgePointsR.Average(p => p.Y));      //Blob average
+                if (Settings.Default.blobMode == true) //Check wether hull tracking mode is enabled
+                    avgR = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));                    //Hull average
+                else
+                    avgR = new PointF((float)edgePointsR.Average(p => p.X), (float)edgePointsR.Average(p => p.Y));      //Blob average
             }
 
-            if (edgePointsR.Count < 5)
-            {
+            if (edgePointsR.Count < 5) //Check blink state
                 blinkR = 1;
-            }
-            else blinkR = 0;
-            
+            else 
+                blinkR = 0;
+
             centerR = new PointF(avgR.X - zeroR.X + center.X, avgR.Y - zeroR.Y + center.Y);
 
             grayImage.UnlockBits(data);
-            
+
             pictureBox7.Image = null;
 
             using (var paint = new PaintEventArgs(pictureBox7.CreateGraphics(), pictureBox7.ClientRectangle))
@@ -401,7 +380,7 @@ namespace TacoEyeTrack
                 else
                 {
                     Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                    paint.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                    paint.Graphics.DrawEllipse(pen, centerR.X - 20, centerR.Y - 20, 40, 40);
                     pen.Dispose();
                     paint.Dispose();
                 }
@@ -414,7 +393,7 @@ namespace TacoEyeTrack
             SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
         }
         //Draw Left tracked blob
-        public void pictureBox8_Paint(object sender,PaintEventArgs e)
+        public void PictureBox8_Paint(object sender, PaintEventArgs e)
         {
             if (blinkL == 1)
             {
@@ -424,13 +403,13 @@ namespace TacoEyeTrack
             else
             {
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                e.Graphics.DrawEllipse(pen, centerL.X, centerL.Y, 40, 40);
+                e.Graphics.DrawEllipse(pen, centerL.X - 20, centerL.Y - 20, 40, 40);
                 pen.Dispose();
                 e.Dispose();
             }
         }
         //Draw Right tracked blob
-        private void pictureBox7_Paint(object sender, PaintEventArgs e)
+        private void PictureBox7_Paint(object sender, PaintEventArgs e)
         {
             if (blinkR == 1)
             {
@@ -440,12 +419,12 @@ namespace TacoEyeTrack
             else
             {
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                e.Graphics.DrawEllipse(pen, centerR.X, centerR.Y, 40, 40);
+                e.Graphics.DrawEllipse(pen, centerR.X - 20, centerR.Y - 20, 40, 40);
                 pen.Dispose();
                 e.Dispose();
             }
         }
-        private void btnload_Click(object sender, EventArgs e)
+        private void BtnLoad_Click(object sender, EventArgs e)
         {
             zeroL = avgL;
             zeroR = avgR;
@@ -455,7 +434,7 @@ namespace TacoEyeTrack
             this.label5.Text = "X: " + centerL.X.ToString() + "Y: " + centerL.Y.ToString();
             this.label6.Text = "X: " + centerR.X.ToString() + "Y: " + centerR.Y.ToString();
         }
-        
+
         private void TrackingForm_Load(object sender, EventArgs e)
         {
             //Load all variables from settings
@@ -478,33 +457,33 @@ namespace TacoEyeTrack
             this.blobHeightR.Text = Settings.Default["blobHeightR"].ToString();
             this.blobWidthL.Text = Settings.Default["blobWidthL"].ToString();
             this.blobWidthR.Text = Settings.Default["blobWidthR"].ToString();
-            
+
             this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 180) - 1);
             this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 180) - 1);
         }
-        
-        private void sliderL_MouseDown(object sender, MouseEventArgs e)
+
+        private void SliderL_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["sliderL"] = sliderL.ManipulatorPosition;
             this.sliderValL.Text = sliderL.ManipulatorPosition.ToString();
             Settings.Default.Save();
         }
 
-        private void sliderL_MouseUp(object sender, MouseEventArgs e)
+        private void SliderL_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["sliderL"] = sliderL.ManipulatorPosition;
             this.sliderValL.Text = sliderL.ManipulatorPosition.ToString();
             Settings.Default.Save();
         }
 
-        private void sliderR_MouseUp(object sender, MouseEventArgs e)
+        private void SliderR_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default["sliderR"] = sliderR.ManipulatorPosition;
             this.sliderValR.Text = sliderR.ManipulatorPosition.ToString();
             Settings.Default.Save();
         }
 
-        private void sliderR_MouseDown(object sender, MouseEventArgs e)
+        private void SliderR_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default["sliderR"] = sliderR.ManipulatorPosition;
             this.sliderValR.Text = sliderR.ManipulatorPosition.ToString();
@@ -567,25 +546,25 @@ namespace TacoEyeTrack
             Settings.Default.Save();
         }
 
-        private void rotateSliderL_MouseDown(object sender, MouseEventArgs e)
+        private void RotateSliderL_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default.rotationL = (float)((rotateSliderL.ManipulatorPosition + 1) * 180);
             Settings.Default.Save();
         }
 
-        private void rotateSliderL_MouseUp(object sender, MouseEventArgs e)
+        private void RotateSliderL_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default.rotationL = (float)((rotateSliderL.ManipulatorPosition + 1) * 180);
             Settings.Default.Save();
         }
 
-        private void rotateSliderR_MouseDown(object sender, MouseEventArgs e)
+        private void RotateSliderR_MouseDown(object sender, MouseEventArgs e)
         {
             Settings.Default.rotationR = (float)((rotateSliderR.ManipulatorPosition + 1) * 180);
             Settings.Default.Save();
         }
 
-        private void rotateSliderR_MouseUp(object sender, MouseEventArgs e)
+        private void RotateSliderR_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default.rotationR = (float)((rotateSliderR.ManipulatorPosition + 1) * 180);
             Settings.Default.Save();

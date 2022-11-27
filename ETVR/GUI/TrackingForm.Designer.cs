@@ -107,7 +107,7 @@
             this.btnload.TabIndex = 3;
             this.btnload.Text = "Center";
             this.btnload.UseVisualStyleBackColor = false;
-            this.btnload.Click += new System.EventHandler(this.btnload_Click);
+            this.btnload.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // sliderL
             // 
@@ -121,8 +121,8 @@
             this.sliderL.Size = new System.Drawing.Size(184, 23);
             this.sliderL.TabIndex = 4;
             this.sliderL.Text = "sliderControl1";
-            this.sliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderL_MouseDown);
-            this.sliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.sliderL_MouseUp);
+            this.sliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SliderL_MouseDown);
+            this.sliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SliderL_MouseUp);
             // 
             // sliderR
             // 
@@ -136,8 +136,8 @@
             this.sliderR.Size = new System.Drawing.Size(184, 23);
             this.sliderR.TabIndex = 5;
             this.sliderR.Text = "sliderControl2";
-            this.sliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderR_MouseDown);
-            this.sliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.sliderR_MouseUp);
+            this.sliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SliderR_MouseDown);
+            this.sliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SliderR_MouseUp);
             // 
             // sliderValL
             // 
@@ -402,7 +402,7 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox8.TabIndex = 28;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox8_Paint);
+            this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox8_Paint);
             // 
             // rotateSliderL
             // 
@@ -417,8 +417,8 @@
             this.rotateSliderL.Size = new System.Drawing.Size(22, 366);
             this.rotateSliderL.TabIndex = 32;
             this.rotateSliderL.Text = "Rotate Left Image";
-            this.rotateSliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rotateSliderL_MouseDown);
-            this.rotateSliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rotateSliderL_MouseUp);
+            this.rotateSliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RotateSliderL_MouseDown);
+            this.rotateSliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RotateSliderL_MouseUp);
             // 
             // rotateSliderR
             // 
@@ -434,8 +434,8 @@
             this.rotateSliderR.Size = new System.Drawing.Size(22, 366);
             this.rotateSliderR.TabIndex = 33;
             this.rotateSliderR.Text = "Rotate Right Image";
-            this.rotateSliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseDown);
-            this.rotateSliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rotateSliderR_MouseUp);
+            this.rotateSliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RotateSliderR_MouseDown);
+            this.rotateSliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RotateSliderR_MouseUp);
             // 
             // pictureBox7
             // 
@@ -448,7 +448,7 @@
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox7.TabIndex = 29;
             this.pictureBox7.TabStop = false;
-            this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox7_Paint);
+            this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox7_Paint);
             // 
             // label5
             // 

@@ -181,7 +181,7 @@ namespace TacoEyeTrack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("380, 380")]
         public global::System.Drawing.Point endPointL {
             get {
                 return ((global::System.Drawing.Point)(this["endPointL"]));
@@ -193,7 +193,7 @@ namespace TacoEyeTrack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("380, 380")]
         public global::System.Drawing.Point endPointR {
             get {
                 return ((global::System.Drawing.Point)(this["endPointR"]));
@@ -224,6 +224,18 @@ namespace TacoEyeTrack.Properties {
             }
             set {
                 this["port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blobMode {
+            get {
+                return ((bool)(this["blobMode"]));
+            }
+            set {
+                this["blobMode"] = value;
             }
         }
     }

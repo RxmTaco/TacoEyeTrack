@@ -23,16 +23,9 @@ namespace TacoEyeTrack
         [STAThread]
         static void Main()
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new EyeTracker());
-
-            /*
-            Stream s = new Stream();
-            Thread backgroundThread = new Thread(new ThreadStart(s));
-            backgroundThread.Start();
-            */
         }
     }
 }
