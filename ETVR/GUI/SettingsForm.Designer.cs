@@ -37,7 +37,6 @@
             this.addressBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.portBox = new System.Windows.Forms.TextBox();
-            this.blobMode = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label2
@@ -136,25 +135,12 @@
             this.portBox.TabIndex = 12;
             this.portBox.Text = "9000";
             // 
-            // blobMode
-            // 
-            this.blobMode.AutoSize = true;
-            this.blobMode.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobMode.Location = new System.Drawing.Point(187, 28);
-            this.blobMode.Name = "blobMode";
-            this.blobMode.Size = new System.Drawing.Size(121, 17);
-            this.blobMode.TabIndex = 14;
-            this.blobMode.Text = "Enable Hull tracking";
-            this.blobMode.UseVisualStyleBackColor = true;
-            this.blobMode.CheckedChanged += new System.EventHandler(this.BlobMode_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 550);
-            this.Controls.Add(this.blobMode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.portBox);
             this.Controls.Add(this.label3);
@@ -170,7 +156,6 @@
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -184,6 +169,5 @@
         public System.Windows.Forms.TextBox addressBox;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox portBox;
-        private System.Windows.Forms.CheckBox blobMode;
     }
 }
