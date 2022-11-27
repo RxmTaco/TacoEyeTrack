@@ -46,36 +46,29 @@ namespace TacoEyeTrack
         {
             InitializeComponent();
 
+            //Get urls
             if (Settings.Default.urlL.Length == 0)
-            {
                 url1 = "No Source";
-            }
             else
-            {
                 url1 = Settings.Default["urlL"].ToString();
-            }
 
             if (Settings.Default.urlR.Length == 0)
-            {
                 url2 = "No Source";
-            }
             else
-            {
                 url2 = Settings.Default["urlR"].ToString();
-            }
 
             //Start stream
             stream1 = new MJPEGStream(url1);
-            stream1.NewFrame += playerControl1_NewFrame;
+            stream1.NewFrame += PlayerControl1_NewFrame;
 
             stream2 = new MJPEGStream(url2);
-            stream2.NewFrame += playerControl2_NewFrame;
+            stream2.NewFrame += PlayerControl2_NewFrame;
 
             stream1.Start();
             stream2.Start();
         }
 
-        public void playerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void PlayerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             
             //Image from stream
@@ -97,7 +90,7 @@ namespace TacoEyeTrack
             pictureBox1.Image = bmp;
         }
 
-        public void playerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        public void PlayerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Image from stream
             bmp2 = (Bitmap)eventArgs.Frame.Clone();
@@ -128,7 +121,7 @@ namespace TacoEyeTrack
             startPointR = Settings.Default.startPointR;
         }
         
-        public void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        public void PictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Get start point
             if ((e.Button == MouseButtons.Left) && (onBox1 == true) && pictureBox1.Image != null)
@@ -142,7 +135,7 @@ namespace TacoEyeTrack
             }
         }
         
-        private void pictureBox1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void PictureBox1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Track end point
             while ((e.Button == MouseButtons.Left) && (onBox1 == true) && pictureBox1.Image != null)
@@ -157,7 +150,7 @@ namespace TacoEyeTrack
             }
         }
 
-        private void pictureBox2_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void PictureBox2_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Get start point
             if ((e.Button == MouseButtons.Left) && (onBox2 == true) && pictureBox2.Image != null)
@@ -171,7 +164,7 @@ namespace TacoEyeTrack
             }
         }
 
-        private void pictureBox2_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void PictureBox2_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Track end point
             while ((e.Button == MouseButtons.Left) && (onBox2 == true) && pictureBox2.Image != null)
@@ -190,22 +183,22 @@ namespace TacoEyeTrack
         bool onBox1 = false;
         bool onBox2 = false;
 
-        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        private void PictureBox1_MouseEnter(object sender, EventArgs e)
         {
             onBox1 = true;
         }
 
-        private void pictureBox2_MouseEnter(object sender, EventArgs e)
+        private void PictureBox2_MouseEnter(object sender, EventArgs e)
         {
             onBox2 = true;
         }
 
-        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        private void PictureBox2_MouseLeave(object sender, EventArgs e)
         {
             onBox2 = false;
         }
 
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        private void PictureBox1_MouseLeave(object sender, EventArgs e)
         {
             onBox1 = false;
         }

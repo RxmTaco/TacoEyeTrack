@@ -104,6 +104,9 @@
             // 
             this.btncropping.BackColor = System.Drawing.Color.Purple;
             this.btncropping.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
+            this.btncropping.FlatAppearance.BorderSize = 0;
+            this.btncropping.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Purple;
+            this.btncropping.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Fuchsia;
             this.btncropping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btncropping.ForeColor = System.Drawing.SystemColors.Control;
             this.btncropping.Location = new System.Drawing.Point(224, 5);
@@ -119,6 +122,9 @@
             // 
             this.btntracking.BackColor = System.Drawing.Color.Purple;
             this.btntracking.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
+            this.btntracking.FlatAppearance.BorderSize = 0;
+            this.btntracking.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Purple;
+            this.btntracking.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Fuchsia;
             this.btntracking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btntracking.ForeColor = System.Drawing.SystemColors.Control;
             this.btntracking.Location = new System.Drawing.Point(118, 5);
@@ -134,6 +140,9 @@
             // 
             this.btnsettings.BackColor = System.Drawing.Color.Purple;
             this.btnsettings.FlatAppearance.BorderColor = System.Drawing.Color.Magenta;
+            this.btnsettings.FlatAppearance.BorderSize = 0;
+            this.btnsettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Purple;
+            this.btnsettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Fuchsia;
             this.btnsettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnsettings.ForeColor = System.Drawing.SystemColors.Control;
             this.btnsettings.Location = new System.Drawing.Point(12, 6);
