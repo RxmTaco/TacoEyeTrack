@@ -62,6 +62,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.blobMode = new System.Windows.Forms.CheckBox();
+            this.smoothBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -475,7 +477,7 @@
             // 
             this.blobMode.AutoSize = true;
             this.blobMode.ForeColor = System.Drawing.SystemColors.Control;
-            this.blobMode.Location = new System.Drawing.Point(199, 50);
+            this.blobMode.Location = new System.Drawing.Point(130, 17);
             this.blobMode.Name = "blobMode";
             this.blobMode.Size = new System.Drawing.Size(125, 17);
             this.blobMode.TabIndex = 36;
@@ -483,12 +485,35 @@
             this.blobMode.UseVisualStyleBackColor = true;
             this.blobMode.CheckedChanged += new System.EventHandler(this.BlobMode_CheckedChanged);
             // 
+            // smoothBox
+            // 
+            this.smoothBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.smoothBox.Location = new System.Drawing.Point(299, 21);
+            this.smoothBox.Name = "smoothBox";
+            this.smoothBox.Size = new System.Drawing.Size(22, 13);
+            this.smoothBox.TabIndex = 37;
+            this.smoothBox.Text = "3";
+            this.smoothBox.TextChanged += new System.EventHandler(this.SmoothBox_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.ForeColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(327, 13);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(193, 26);
+            this.label9.TabIndex = 38;
+            this.label9.Text = "Smoothing Iterations\r\n(Lower = less smoothing and less delay)";
+            // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(820, 550);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.smoothBox);
             this.Controls.Add(this.blobMode);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -575,5 +600,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox blobMode;
+        private System.Windows.Forms.TextBox smoothBox;
+        private System.Windows.Forms.Label label9;
     }
 }

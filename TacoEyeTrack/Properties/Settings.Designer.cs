@@ -238,5 +238,17 @@ namespace TacoEyeTrack.Properties {
                 this["blobMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int smoothingIterations {
+            get {
+                return ((int)(this["smoothingIterations"]));
+            }
+            set {
+                this["smoothingIterations"] = value;
+            }
+        }
     }
 }
