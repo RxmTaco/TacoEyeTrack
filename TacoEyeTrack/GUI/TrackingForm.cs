@@ -3,6 +3,8 @@ using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math.Geometry;
 using AForge.Video;
+using MoreLinq;
+using OpenMod.Core.Helpers;
 using Rug.Osc;
 using System;
 using System.Collections.Generic;
@@ -36,13 +38,25 @@ namespace TacoEyeTrack
 
         int blinkL = 0;
         int blinkR = 0;
+        
+        float[] pointsLX;
+        float[] pointsLY;
+        float[] pointsRX;
+        float[] pointsRY;
+        PointF smoothPointL;
+        PointF smoothPointR;
 
         OscSender sender;
-
+        
         public TrackingForm()
         {
             InitializeComponent();
 
+            pointsLX = new float[100];
+            pointsLY = new float[100];
+            pointsRX = new float[100];
+            pointsRY = new float[100];
+            
             //Get urls
             if (Settings.Default.urlL.Length == 0)
                 url = "No Source";
@@ -75,6 +89,75 @@ namespace TacoEyeTrack
 
             //Connect to socket
             sender.Connect();
+        }
+
+        public void Smoothing(float lx, float ly, float rx, float ry)
+        {
+            int smoothingIterations = Settings.Default.smoothingIterations;
+            
+            if (smoothingIterations > 1)
+            {
+                //Add new points to array and shift all other points so newest point is at 0 position
+                float[] tempLX = new float[smoothingIterations];
+                float[] tempLY = new float[smoothingIterations];
+                float[] tempRX = new float[smoothingIterations];
+                float[] tempRY = new float[smoothingIterations];
+                tempLX = pointsLX;
+                tempLY = pointsLY;
+                tempRX = pointsRX;
+                tempRY = pointsRY;
+                Array.Copy(tempLX, 0, pointsLX, 1, pointsLX.Length - 1);
+                Array.Copy(tempLY, 0, pointsLY, 1, pointsLY.Length - 1);
+                Array.Copy(tempRX, 0, pointsRX, 1, pointsRX.Length - 1);
+                Array.Copy(tempRY, 0, pointsRY, 1, pointsRY.Length - 1);
+
+                pointsLX[0] = new float[] { lx }[0];
+                pointsLY[0] = new float[] { ly }[0];
+                pointsRX[0] = new float[] { rx }[0];
+                pointsRY[0] = new float[] { ry }[0];
+
+                //Smoothing algorithm
+
+                //Get average of all points
+
+                float sumLX = 0;
+                float sumLY = 0;
+                float sumRX = 0;
+                float sumRY = 0;
+
+                for (int i = 0; i < smoothingIterations; i++)
+                {
+                    sumLX += pointsLX[i];
+                    sumLY += pointsLY[i];
+                    sumRX += pointsRX[i];
+                    sumRY += pointsRY[i];
+                }
+                smoothPointL.X = sumLX / smoothingIterations;
+                smoothPointL.Y = sumLY / smoothingIterations;
+                smoothPointR.X = sumRX / smoothingIterations;
+                smoothPointR.Y = sumRY / smoothingIterations;
+
+                for (int i = 0; i < smoothingIterations; i++)
+                {
+                    Console.Write(pointsLX[i] + " " + pointsLY[i]);
+                    Console.Write(" | ");
+                    Console.WriteLine(pointsRX[i] + " " + pointsRY[i]);
+                }
+            }
+            else
+            {
+                smoothPointL.X = lx;
+                smoothPointL.Y = ly;
+                smoothPointR.X = rx;
+                smoothPointR.Y = ry;
+            }
+            pointsLX.Consume();
+            pointsLY.Consume();
+            pointsRX.Consume();
+            pointsRX.Consume();
+            
+            Console.Write("LeftAverage " + smoothPointL);
+            Console.WriteLine("RightAverage " + smoothPointR);
         }
 
         public void SendOsc(float lx, float ly, float rx, float ry, int lb, int rb)
@@ -226,7 +309,9 @@ namespace TacoEyeTrack
                 blinkL = 0;
             
             centerL = new PointF(avgL.X - zeroL.X + center.X, avgL.Y - zeroL.Y + center.Y);
-            
+
+            Smoothing(centerL.X, centerL.Y, centerR.X, centerR.Y);
+
             grayImage.UnlockBits(data);
 
             pictureBox8.Image = null;
@@ -240,7 +325,7 @@ namespace TacoEyeTrack
                 else
                 {
                     Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                    paint.Graphics.DrawEllipse(pen, centerL.X - 20, centerL.Y - 20, 40, 40);
+                    paint.Graphics.DrawEllipse(pen, smoothPointL.X - 20, smoothPointL.Y - 20, 40, 40);
                     pen.Dispose();
                     paint.Dispose();
                 }
@@ -250,7 +335,7 @@ namespace TacoEyeTrack
             pictureBox6.Image = grayImage;
 
             //Send OSC
-            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
+            SendOsc(smoothPointL.X, smoothPointL.Y, smoothPointR.X, smoothPointR.Y, blinkL, blinkR);
         }
 
         public void PlayerControl2_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -366,6 +451,8 @@ namespace TacoEyeTrack
 
             centerR = new PointF(avgR.X - zeroR.X + center.X, avgR.Y - zeroR.Y + center.Y);
 
+            Smoothing(centerL.X, centerL.Y, centerR.X, centerR.Y);
+
             grayImage.UnlockBits(data);
 
             pictureBox7.Image = null;
@@ -390,7 +477,7 @@ namespace TacoEyeTrack
             pictureBox5.Image = grayImage;
 
             //Send OSC
-            SendOsc(centerL.X, centerL.Y, centerR.X, centerR.Y, blinkL, blinkR);
+            SendOsc(smoothPointL.X, smoothPointL.Y, smoothPointR.X, smoothPointR.Y, blinkL, blinkR);
         }
         //Draw Left tracked blob
         public void PictureBox8_Paint(object sender, PaintEventArgs e)
@@ -403,7 +490,7 @@ namespace TacoEyeTrack
             else
             {
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                e.Graphics.DrawEllipse(pen, centerL.X - 20, centerL.Y - 20, 40, 40);
+                e.Graphics.DrawEllipse(pen, smoothPointL.X - 20, smoothPointL.Y - 20, 40, 40);
                 pen.Dispose();
                 e.Dispose();
             }
@@ -419,7 +506,7 @@ namespace TacoEyeTrack
             else
             {
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
-                e.Graphics.DrawEllipse(pen, centerR.X - 20, centerR.Y - 20, 40, 40);
+                e.Graphics.DrawEllipse(pen, smoothPointR.X - 20, smoothPointR.Y - 20, 40, 40);
                 pen.Dispose();
                 e.Dispose();
             }
@@ -462,6 +549,8 @@ namespace TacoEyeTrack
             this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 180) - 1);
             
             this.blobMode.Checked = Settings.Default.blobMode;
+
+            this.smoothBox.Text = (Settings.Default.smoothingIterations - 1).ToString();
         }
 
         private void SliderL_MouseDown(object sender, MouseEventArgs e)
@@ -575,6 +664,28 @@ namespace TacoEyeTrack
         {
             Settings.Default["blobMode"] = blobMode.Checked;
             Settings.Default.Save();
+        }
+
+        private void SmoothBox_TextChanged(object sender, EventArgs e)
+        {
+            if (smoothBox.Text != "" && int.Parse(smoothBox.Text) < 100)
+            {
+                Settings.Default["smoothingIterations"] = int.Parse(smoothBox.Text) + 1;
+                Settings.Default.Save();
+            }
+            else
+            {
+                Settings.Default["smoothingIterations"] = 1;
+                Settings.Default.Save();
+            }
+            if (smoothBox.Text != "" && int.Parse(smoothBox.Text) >= 100)
+            {
+                Settings.Default["smoothingIterations"] = 1;
+                Settings.Default.Save();
+                smoothBox.Text = "0";
+                Exception ex = new Exception("Smoothing iterations must be less than 100, this amount of delay will have your eyes moving next year");
+                MessageBox.Show(ex.Message, "Bruh", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
