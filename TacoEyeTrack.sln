@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TacoEyeTrack", "ETVR\TacoEyeTrack.csproj", "{6A413146-3DA2-45EC-B848-9BA57CF43808}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TacoEyeTrack", "TacoEyeTrack\TacoEyeTrack.csproj", "{6A413146-3DA2-45EC-B848-9BA57CF43808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
