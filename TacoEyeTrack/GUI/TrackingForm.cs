@@ -460,6 +460,8 @@ namespace TacoEyeTrack
 
             this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 180) - 1);
             this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 180) - 1);
+            
+            this.blobMode.Checked = Settings.Default.blobMode;
         }
 
         private void SliderL_MouseDown(object sender, MouseEventArgs e)
@@ -567,6 +569,11 @@ namespace TacoEyeTrack
         private void RotateSliderR_MouseUp(object sender, MouseEventArgs e)
         {
             Settings.Default.rotationR = (float)((rotateSliderR.ManipulatorPosition + 1) * 180);
+            Settings.Default.Save();
+        }
+        private void BlobMode_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default["blobMode"] = blobMode.Checked;
             Settings.Default.Save();
         }
     }

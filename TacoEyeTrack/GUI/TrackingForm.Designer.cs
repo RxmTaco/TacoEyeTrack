@@ -61,6 +61,7 @@
             this.pictureBox7 = new AForge.Controls.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.blobMode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -470,12 +471,25 @@
             this.label6.TabIndex = 35;
             this.label6.Text = "Right";
             // 
+            // blobMode
+            // 
+            this.blobMode.AutoSize = true;
+            this.blobMode.ForeColor = System.Drawing.SystemColors.Control;
+            this.blobMode.Location = new System.Drawing.Point(199, 50);
+            this.blobMode.Name = "blobMode";
+            this.blobMode.Size = new System.Drawing.Size(125, 17);
+            this.blobMode.TabIndex = 36;
+            this.blobMode.Text = "Enable Hull Tracking";
+            this.blobMode.UseVisualStyleBackColor = true;
+            this.blobMode.CheckedChanged += new System.EventHandler(this.BlobMode_CheckedChanged);
+            // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(820, 550);
+            this.Controls.Add(this.blobMode);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.rotateSliderR);
@@ -560,5 +574,6 @@
         private AForge.Controls.PictureBox pictureBox7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox blobMode;
     }
 }

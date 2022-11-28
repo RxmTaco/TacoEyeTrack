@@ -26,7 +26,6 @@ namespace TacoEyeTrack
             this.boxR.Text = Settings.Default["urlR"].ToString();
             this.addressBox.Text = Settings.Default["ip"].ToString();
             this.portBox.Text = Settings.Default["port"].ToString();
-            this.blobMode.Checked = Settings.Default.blobMode;
         }
 
         private void SaveSettings_Click(object sender, EventArgs e)
@@ -35,12 +34,6 @@ namespace TacoEyeTrack
             Settings.Default["urlR"] = boxR.Text;
             Settings.Default["ip"] = addressBox.Text;
             Settings.Default.port = Convert.ToInt32(portBox.Text);
-            Settings.Default.Save();
-        }
-
-        private void BlobMode_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default["blobMode"] = blobMode.Checked;
             Settings.Default.Save();
         }
     }
