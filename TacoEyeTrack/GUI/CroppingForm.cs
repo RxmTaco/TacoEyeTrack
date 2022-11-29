@@ -202,6 +202,11 @@ namespace TacoEyeTrack
         {
             onBox1 = false;
         }
-        
+
+        private void CroppingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream1.Stop();
+            stream2.Stop();
+        }
     }
 }

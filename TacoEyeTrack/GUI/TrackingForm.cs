@@ -710,5 +710,11 @@ namespace TacoEyeTrack
                 MessageBox.Show(ex.Message, "Bruh", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+
+        private void TrackingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream1.Stop();
+            stream2.Stop();
+        }
     }
 }

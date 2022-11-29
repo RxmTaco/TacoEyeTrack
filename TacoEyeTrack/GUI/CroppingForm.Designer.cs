@@ -78,6 +78,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CroppingForm";
             this.Text = "CroppingForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CroppingForm_FormClosing);
             this.Load += new System.EventHandler(this.CroppingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

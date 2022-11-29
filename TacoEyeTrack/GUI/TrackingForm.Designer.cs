@@ -551,6 +551,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TrackingForm";
             this.Text = "TrackingForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TrackingForm_FormClosing);
             this.Load += new System.EventHandler(this.TrackingForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
