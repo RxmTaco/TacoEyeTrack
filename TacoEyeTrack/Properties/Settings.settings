@@ -59,5 +59,26 @@
     <Setting Name="smoothingIterations" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="leftEyeX" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/LeftEyeX</Value>
+    </Setting>
+    <Setting Name="leftEyeY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/LeftEyeY</Value>
+    </Setting>
+    <Setting Name="rightEyeX" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/RightEyeX</Value>
+    </Setting>
+    <Setting Name="rightEyeY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/RightEyeY</Value>
+    </Setting>
+    <Setting Name="leftBlink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/LeftEyeLid</Value>
+    </Setting>
+    <Setting Name="rightBlink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/avatar/parameters/RightEyeLid</Value>
+    </Setting>
+    <Setting Name="blinkMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
