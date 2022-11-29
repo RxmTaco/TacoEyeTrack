@@ -1,6 +1,6 @@
-# TacoTrack
+# TacoEyeTrack
 
-Eye tracking application for VRChat using OSC inspired by [RedHawk989](https://github.com/RedHawk989/EyeTrackVR)
+VR eye tracking application for VRChat using OSC inspired by [RedHawk989](https://github.com/RedHawk989/EyeTrackVR)
 
 ![eyetrack](https://user-images.githubusercontent.com/117571946/204283521-a67e8b5c-3bf1-4fd2-b751-bb9a62c91ae8.gif)
 
