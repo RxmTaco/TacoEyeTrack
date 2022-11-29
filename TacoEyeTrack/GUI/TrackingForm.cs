@@ -3,6 +3,7 @@ using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math.Geometry;
 using AForge.Video;
+using Aspose.Imaging.FileFormats.Tiff.FileManagement;
 using MoreLinq;
 using OpenMod.Core.Helpers;
 using Rug.Osc;
@@ -175,18 +176,40 @@ namespace TacoEyeTrack
             */
 
             int c = 100; //map range
-            OscMessage LX = new OscMessage("/avatar/parameters/LeftEyeX", (lx - c) / c); 
-            OscMessage LY = new OscMessage("/avatar/parameters/LeftEyeY", (ly - c) / c);
-            OscMessage RX = new OscMessage("/avatar/parameters/RightEyeX", (rx - c) / c);
-            OscMessage RY = new OscMessage("/avatar/parameters/RightEyeY", (ry - c) / c);
-            OscMessage LB = new OscMessage("/avatar/parameters/LeftEyeLid", lb);
-            OscMessage RB = new OscMessage("/avatar/parameters/RightEyeLid", rb);
+            OscMessage LX = new OscMessage(Settings.Default["leftEyeX"].ToString(), (lx - c) / c); 
+            OscMessage LY = new OscMessage(Settings.Default["leftEyeY"].ToString(), (ly - c) / c);
+            OscMessage RX = new OscMessage(Settings.Default["rightEyeX"].ToString(), (rx - c) / c);
+            OscMessage RY = new OscMessage(Settings.Default["rightEyeY"].ToString(), (ry - c) / c);
+            OscMessage LB;
+            OscMessage RB;
+
+            if (Settings.Default.blinkMode == false) 
+            { 
+                LB = new OscMessage(Settings.Default["leftBlink"].ToString(), lb);
+                RB = new OscMessage(Settings.Default["rightBlink"].ToString(), rb);
+            }
+            else
+            {
+                if(lb == 1)
+                    LB = new OscMessage(Settings.Default["leftBlink"].ToString(), true);
+                else
+                    LB = new OscMessage(Settings.Default["leftBlink"].ToString(), false);
+                if(rb == 1)
+                    RB = new OscMessage(Settings.Default["rightBlink"].ToString(), true);
+                else
+                    RB = new OscMessage(Settings.Default["rightBlink"].ToString(), false);
+            }
+
             /*
             Console.Write("LX" + (lx - c) / c + " | " + lx + " | ");
             Console.Write("LY" + (ly - c) / c + " | " + ly + " | ");
             Console.Write("RX" + (rx - c) / c + " | " + rx + " | ");
             Console.WriteLine("RY" + (ry - c) / c + " | " + ry + " | ");
+            
+            Console.Write(LB);
+            Console.WriteLine(RB);
             */
+
             sender.Send(LX);
             sender.Send(LY);
             sender.Send(RX);
@@ -686,6 +709,12 @@ namespace TacoEyeTrack
                 Exception ex = new Exception("Smoothing iterations must be less than 100, this amount of delay will have your eyes moving next year");
                 MessageBox.Show(ex.Message, "Bruh", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void TrackingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stream1.Stop();
+            stream2.Stop();
         }
     }
 }

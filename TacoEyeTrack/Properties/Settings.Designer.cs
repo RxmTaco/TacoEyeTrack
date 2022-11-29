@@ -250,5 +250,89 @@ namespace TacoEyeTrack.Properties {
                 this["smoothingIterations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/LeftEyeX")]
+        public string leftEyeX {
+            get {
+                return ((string)(this["leftEyeX"]));
+            }
+            set {
+                this["leftEyeX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/LeftEyeY")]
+        public string leftEyeY {
+            get {
+                return ((string)(this["leftEyeY"]));
+            }
+            set {
+                this["leftEyeY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/RightEyeX")]
+        public string rightEyeX {
+            get {
+                return ((string)(this["rightEyeX"]));
+            }
+            set {
+                this["rightEyeX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/RightEyeY")]
+        public string rightEyeY {
+            get {
+                return ((string)(this["rightEyeY"]));
+            }
+            set {
+                this["rightEyeY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/LeftEyeLid")]
+        public string leftBlink {
+            get {
+                return ((string)(this["leftBlink"]));
+            }
+            set {
+                this["leftBlink"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/avatar/parameters/RightEyeLid")]
+        public string rightBlink {
+            get {
+                return ((string)(this["rightBlink"]));
+            }
+            set {
+                this["rightBlink"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blinkMode {
+            get {
+                return ((bool)(this["blinkMode"]));
+            }
+            set {
+                this["blinkMode"] = value;
+            }
+        }
     }
 }

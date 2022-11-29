@@ -49,16 +49,24 @@ namespace TacoEyeTrack
 
         private void btnsettings_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms["CroppingForm"] != null)
+                Application.OpenForms["CroppingForm"].Close();
+            if (Application.OpenForms["TrackingForm"] != null)
+                Application.OpenForms["TrackingForm"].Close();
             loadform(new SettingsForm());
         }
 
         private void btntracking_Click(object sender, EventArgs e)
         {
+            if(Application.OpenForms["CroppingForm"] != null)
+            Application.OpenForms["CroppingForm"].Close();
             loadform(new TrackingForm());
         }
 
         private void btncropping_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms["TrackingForm"] != null)
+                Application.OpenForms["TrackingForm"].Close();
             loadform(new CroppingForm());
         }
 
