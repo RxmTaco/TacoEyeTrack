@@ -19,9 +19,9 @@ Parameters sent over OSC:
 - LeftEyeY      (float)
 - RightEyeX     (float)
 - RightEyeY     (float)
-- LeftEyeLid    (int)
-- RightEyeLid   (int)
+- LeftEyeLid    (int / bool)
+- RightEyeLid   (int / bool)
 
-For float values range is -1.0 to 1.0, for int values 1 when blink detected and 0 when eye is open. As of now blinking is only detected as either open or closed.
+(All OSC parameters can be changed from within the app as needed)
 
 *Still a work-in-progress, new features constantly rolling out.*
