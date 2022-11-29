@@ -24,4 +24,10 @@ Parameters sent over OSC:
 
 (All OSC parameters can be changed from within the app as needed)
 
-*Still a work-in-progress, new features constantly rolling out.*
+Default address for avatar parameters is /avatar/parameters/"**parameter_name**"
+
+Float values range from -1 to 1 (this will be adjustable in a future update)
+
+Blink values can be either sent as an integer (1 or 0) or boolean (true or false) depending how your avatar is set up.
+
+***Still a work-in-progress, new features constantly rolling out!***
