@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Windows.Forms;
 using TacoEyeTrack.Properties;
 
@@ -221,6 +222,21 @@ namespace TacoEyeTrack
             //sender = null;
         }
 
+        public void LidTracking(Bitmap bmp)
+        {
+            //initialize corner detection
+            SusanCornersDetector scd = new SusanCornersDetector();
+            //create corner maker filter
+            CornersMarker filter = new CornersMarker(scd, Color.White);
+            //apply the filter
+            filter.ApplyInPlace(bmp);
+            
+            List<IntPoint> corners = scd.ProcessImage(bmp);
+
+            //minimum Y
+            
+        }
+
         public void PlayerControl1_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             //Get images from stream
@@ -265,6 +281,8 @@ namespace TacoEyeTrack
             int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
+
+            LidTracking(grayImage);
 
             //invert
             Invert invert = new Invert();
