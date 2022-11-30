@@ -37,6 +37,9 @@ namespace TacoEyeTrack
         System.Drawing.PointF avgR;
         System.Drawing.PointF center;
 
+        PointF topLid;
+        PointF bottomLid;
+
         int blinkL = 0;
         int blinkR = 0;
         
@@ -92,6 +95,29 @@ namespace TacoEyeTrack
             sender.Connect();
         }
 
+        public void LidTracking(Bitmap bmp)
+        {
+            //initialize corner detection
+            SusanCornersDetector scd = new SusanCornersDetector();
+            //create corner maker filter
+            //CornersMarker filter = new CornersMarker(scd, Color.White);
+            //apply the filter
+            //filter.ApplyInPlace(bmp);
+
+            List<IntPoint> corners = new List<IntPoint>();
+            corners.AddRange(scd.ProcessImage(bmp));
+
+            //minimum Y
+            if (corners.Count > 0)
+            {
+                bottomLid = new PointF((float)corners.Average(p => p.X), (float)corners.Min(p => p.Y));
+                topLid = new PointF((float)corners.Average(p => p.X), (float)corners.Max(p => p.Y));
+            }
+
+            Console.Write("Top Lid: " + topLid);
+            Console.WriteLine("Bottom Lid: " + bottomLid);
+        }
+
         public void Smoothing(float lx, float ly, float rx, float ry)
         {
             int smoothingIterations = Settings.Default.smoothingIterations;
@@ -137,13 +163,14 @@ namespace TacoEyeTrack
                 smoothPointL.Y = sumLY / smoothingIterations;
                 smoothPointR.X = sumRX / smoothingIterations;
                 smoothPointR.Y = sumRY / smoothingIterations;
-
+                /*
                 for (int i = 0; i < smoothingIterations; i++)
                 {
                     Console.Write(pointsLX[i] + " " + pointsLY[i]);
                     Console.Write(" | ");
                     Console.WriteLine(pointsRX[i] + " " + pointsRY[i]);
                 }
+                */
             }
             else
             {
@@ -157,8 +184,8 @@ namespace TacoEyeTrack
             pointsRX.Consume();
             pointsRX.Consume();
             
-            Console.Write("LeftAverage " + smoothPointL);
-            Console.WriteLine("RightAverage " + smoothPointR);
+            //Console.Write("LeftAverage " + smoothPointL);
+            //Console.WriteLine("RightAverage " + smoothPointR);
         }
 
         public void SendOsc(float lx, float ly, float rx, float ry, int lb, int rb)
@@ -261,11 +288,18 @@ namespace TacoEyeTrack
             filter.ApplyInPlace(grayImage);
             */
 
+            //Lid Thresholding
+            int roundedLid = (int)Math.Round((-0.75 + 1) * 250, 0);
+            Threshold lidThreshold = new Threshold(roundedLid);
+            Bitmap lidImage = lidThreshold.Apply(grayImage);
+            
+            LidTracking(lidImage);
+            
             //Thresholding
             int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
             threshold.ApplyInPlace(grayImage);
-
+            
             //invert
             Invert invert = new Invert();
             invert.ApplyInPlace(grayImage);
@@ -513,7 +547,9 @@ namespace TacoEyeTrack
             else
             {
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
+                Pen pen1 = new Pen(System.Drawing.Color.Green, 10);
                 e.Graphics.DrawEllipse(pen, smoothPointL.X - 20, smoothPointL.Y - 20, 40, 40);
+                e.Graphics.DrawLine(pen1, 0, (topLid.Y - bottomLid.Y), 0, pictureBox8.Height);
                 pen.Dispose();
                 e.Dispose();
             }
