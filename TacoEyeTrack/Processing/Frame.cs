@@ -10,5 +10,9 @@ namespace TacoEyeTrack.Processing
     internal class Frame
     {
     }
-    public static (Bitmap, Bitmap, Bitmap, )
+    public static (Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap) GetFrames(Bitmap bmp)
+    {
+        
+        return;
+    }
 }

@@ -298,7 +298,7 @@ namespace TacoEyeTrack
             Threshold lidThreshold = new Threshold(roundedLid);
             Bitmap lidImage = lidThreshold.Apply(grayImage);
             */
-            float lidRatio = Processing.Blink.GetLidRatio(grayImage, Settings.Default.lidL);
+            float lidRatio = Processing.Eye.GetLidRatio(grayImage, Settings.Default.lidL);
             Console.WriteLine(lidRatio);
             //Taco taco = new Taco();
             //float lidRatio = taco.GetLidRatio(grayImage);
