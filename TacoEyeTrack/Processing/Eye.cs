@@ -12,6 +12,7 @@ using TacoEyeTrack.Properties;
 using System.Windows.Media.Imaging;
 using dnlib.PE;
 using System.Windows.Controls;
+using AForge.Math.Geometry;
 
 namespace TacoEyeTrack.Processing
 {
@@ -80,6 +81,39 @@ namespace TacoEyeTrack.Processing
             Bitmap newImage = blur.Apply(bmp);
 
             return newImage;
+        }
+
+        public static List<IntPoint> edgePoints(Bitmap bmp)
+        {
+            BlobCounter blobCounter = new BlobCounter();
+            blobCounter.ProcessImage(bmp);
+            Blob[] blobs = blobCounter.GetObjectsInformation();
+
+            List<IntPoint> leftPoints, rightPoints;
+
+            //Store hull points
+            List<IntPoint> hull = new List<IntPoint>();
+            foreach (Blob blob in blobs)
+            {
+                blobCounter.GetBlobsLeftAndRightEdges(blob, out leftPoints, out rightPoints);
+                if (leftPoints.Count > 0 && rightPoints.Count > 0)
+                {
+                    // get blob's edge points
+                    List<IntPoint> edgePoints = new List<IntPoint>();
+                    edgePoints.AddRange(leftPoints);
+                    edgePoints.AddRange(rightPoints);
+
+                    // blob's convex hull
+                    GrahamConvexHull hullFinder = new GrahamConvexHull();
+                    hull = hullFinder.FindHull(edgePoints);
+                }
+            }
+            return hull;
+        }
+
+        public static PointF AveragePoint(List<IntPoint> points)
+        {
+            avg = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));
         }
 
         public static float GetLidRatio(Bitmap bmp)
