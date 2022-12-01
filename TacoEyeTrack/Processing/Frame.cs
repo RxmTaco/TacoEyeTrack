@@ -12,7 +12,8 @@ namespace TacoEyeTrack.Processing
     }
     public static (Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap, Bitmap) GetFrames(Bitmap bmp)
     {
+        Processing.Eye.Crop(bmp);
         
-        return;
+        return bmp;
     }
 }

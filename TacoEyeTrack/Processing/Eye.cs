@@ -113,8 +113,12 @@ namespace TacoEyeTrack.Processing
 
         public static PointF AveragePoint(List<IntPoint> points)
         {
-            avg = new PointF((float)hull.Average(p => p.X), (float)hull.Average(p => p.Y));
+            PointF avg = new PointF((float)points.Average(p => p.X), (float)points.Average(p => p.Y));
+
+            return avg;
         }
+
+        
 
         public static float GetLidRatio(Bitmap bmp)
         {
