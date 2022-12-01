@@ -37,11 +37,13 @@ namespace TacoEyeTrack
         System.Drawing.PointF avgR;
         System.Drawing.PointF center;
 
-        PointF topLid;
-        PointF bottomLid;
+        //PointF topLid;
+        //PointF bottomLid;
 
         int blinkL = 0;
         int blinkR = 0;
+
+        float ratio;
         
         float[] pointsLX;
         float[] pointsLY;
@@ -107,15 +109,16 @@ namespace TacoEyeTrack
             List<IntPoint> corners = new List<IntPoint>();
             corners.AddRange(scd.ProcessImage(bmp));
 
+            PointF bottomLid = new PointF();
+            PointF topLid = new PointF();
+
             //minimum Y
             if (corners.Count > 0)
             {
                 bottomLid = new PointF((float)corners.Average(p => p.X), (float)corners.Min(p => p.Y));
                 topLid = new PointF((float)corners.Average(p => p.X), (float)corners.Max(p => p.Y));
             }
-
-            Console.Write("Top Lid: " + topLid);
-            Console.WriteLine("Bottom Lid: " + bottomLid);
+            ratio = bottomLid.Y / topLid.Y;
         }
 
         public void Smoothing(float lx, float ly, float rx, float ry)
@@ -207,15 +210,15 @@ namespace TacoEyeTrack
             OscMessage LY = new OscMessage(Settings.Default["leftEyeY"].ToString(), (ly - c) / c);
             OscMessage RX = new OscMessage(Settings.Default["rightEyeX"].ToString(), (rx - c) / c);
             OscMessage RY = new OscMessage(Settings.Default["rightEyeY"].ToString(), (ry - c) / c);
-            OscMessage LB;
-            OscMessage RB;
+            OscMessage LB = new OscMessage(Settings.Default["leftBlink"].ToString(), "");
+            OscMessage RB = new OscMessage(Settings.Default["rightBlink"].ToString(), "");
 
-            if (Settings.Default.blinkMode == false) 
+            if (Settings.Default.blinkMode == 1) 
             { 
                 LB = new OscMessage(Settings.Default["leftBlink"].ToString(), lb);
                 RB = new OscMessage(Settings.Default["rightBlink"].ToString(), rb);
             }
-            else
+            if (Settings.Default.blinkMode == 2)
             {
                 if(lb == 1)
                     LB = new OscMessage(Settings.Default["leftBlink"].ToString(), true);
@@ -243,6 +246,7 @@ namespace TacoEyeTrack
             sender.Send(RY);
             sender.Send(LB);
             sender.Send(RB);
+            
 
             //sender.Dispose();
             //sender = null;
@@ -289,11 +293,13 @@ namespace TacoEyeTrack
             */
 
             //Lid Thresholding
-            int roundedLid = (int)Math.Round((-0.75 + 1) * 250, 0);
+            int roundedLid = (Settings.Default.lidL);
             Threshold lidThreshold = new Threshold(roundedLid);
             Bitmap lidImage = lidThreshold.Apply(grayImage);
-            
+
             LidTracking(lidImage);
+            //Taco taco = new Taco();
+            //float lidRatio = taco.GetLidRatio(grayImage);
             
             //Thresholding
             int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
@@ -549,7 +555,7 @@ namespace TacoEyeTrack
                 Pen pen = new Pen(System.Drawing.Color.DarkBlue, 10);
                 Pen pen1 = new Pen(System.Drawing.Color.Green, 10);
                 e.Graphics.DrawEllipse(pen, smoothPointL.X - 20, smoothPointL.Y - 20, 40, 40);
-                e.Graphics.DrawLine(pen1, 0, (topLid.Y - bottomLid.Y), 0, pictureBox8.Height);
+                e.Graphics.DrawLine(pen1, 0, pictureBox8.Height * ratio, 0, pictureBox8.Height);
                 pen.Dispose();
                 e.Dispose();
             }
@@ -751,6 +757,27 @@ namespace TacoEyeTrack
         {
             stream1.Stop();
             stream2.Stop();
+        }
+
+        private void lidSlider_PositionChanged(object sender, float position)
+        {
+            Settings.Default.lidL = (int)((lidSliderL.ManipulatorPosition + 1) * 100);
+            Settings.Default.Save();
+        }
+
+        private void rotateSliderL_MouseEnter(object sender, EventArgs e)
+        {
+            rotateTT.SetToolTip(rotateSliderL, "Rotate Image");
+        }
+
+        private void rotateSliderR_MouseEnter(object sender, EventArgs e)
+        {
+            rotateTT.SetToolTip(rotateSliderR, "Rotate Image");
+        }
+
+        private void lidSliderL_MouseEnter(object sender, EventArgs e)
+        {
+            blinkTT.SetToolTip(lidSliderL, "Blink Threshold");
         }
     }
 }

@@ -33,16 +33,24 @@ namespace TacoEyeTrack
             rightEyeY.Text = Settings.Default["rightEyeY"].ToString();
             leftBlink.Text = Settings.Default["leftBlink"].ToString();
             rightBlink.Text = Settings.Default["rightBlink"].ToString();
-
-            if (Settings.Default.blinkMode == false)
+            
+            switch (Settings.Default.blinkMode)
             {
-                modeInt.Checked = true;
-                modeBool.Checked = false;
-            }
-            else
-            {
-                modeInt.Checked = false;
-                modeBool.Checked = true;
+                case 1:
+                    modeInt.Checked = true;
+                    modeBool.Checked = false;
+                    modeFloat.Checked = false;
+                    break;
+                case 2:
+                    modeInt.Checked = false;
+                    modeBool.Checked = true;
+                    modeFloat.Checked = false;
+                    break;
+                case 3:
+                    modeInt.Checked = false;
+                    modeBool.Checked = false;
+                    modeFloat.Checked = true;
+                    break;
             }
         }
 
@@ -66,9 +74,10 @@ namespace TacoEyeTrack
         {
             if (modeInt.Checked == true)
             {
-                Settings.Default["blinkMode"] = false;
+                Settings.Default["blinkMode"] = 1;
                 Settings.Default.Save();
                 modeBool.Checked = false;
+                modeFloat.Checked = false;
             }
         }
 
@@ -76,10 +85,27 @@ namespace TacoEyeTrack
         {
             if (modeBool.Checked == true)
             {
-                Settings.Default["blinkMode"] = true;
+                Settings.Default["blinkMode"] = 2;
                 Settings.Default.Save();
                 modeInt.Checked = false;
+                modeFloat.Checked = false;
             }
+        }
+
+        private void modeFloat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (modeBool.Checked == true)
+            {
+                Settings.Default["blinkMode"] = 3;
+                Settings.Default.Save();
+                modeInt.Checked = false;
+                modeBool.Checked = false;
+            }
+        }
+
+        private void label11_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(label11, "int: 0-1, bool: true/false, float: 0.0-1.0");
         }
     }
 }

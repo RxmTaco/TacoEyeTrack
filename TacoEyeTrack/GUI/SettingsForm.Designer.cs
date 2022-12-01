@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.boxR = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,6 +53,8 @@
             this.modeInt = new System.Windows.Forms.CheckBox();
             this.modeBool = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.modeFloat = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label2
@@ -304,6 +307,23 @@
             this.label11.Size = new System.Drawing.Size(62, 13);
             this.label11.TabIndex = 28;
             this.label11.Text = "Blink value:";
+            this.label11.MouseHover += new System.EventHandler(this.label11_MouseHover);
+            // 
+            // modeFloat
+            // 
+            this.modeFloat.AutoSize = true;
+            this.modeFloat.ForeColor = System.Drawing.SystemColors.Control;
+            this.modeFloat.Location = new System.Drawing.Point(728, 272);
+            this.modeFloat.Name = "modeFloat";
+            this.modeFloat.Size = new System.Drawing.Size(46, 17);
+            this.modeFloat.TabIndex = 29;
+            this.modeFloat.Text = "float";
+            this.modeFloat.UseVisualStyleBackColor = true;
+            this.modeFloat.CheckedChanged += new System.EventHandler(this.modeFloat_CheckedChanged);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             // 
             // SettingsForm
             // 
@@ -311,6 +331,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 550);
+            this.Controls.Add(this.modeFloat);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.modeBool);
             this.Controls.Add(this.modeInt);
@@ -370,5 +391,7 @@
         private System.Windows.Forms.CheckBox modeInt;
         private System.Windows.Forms.CheckBox modeBool;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox modeFloat;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

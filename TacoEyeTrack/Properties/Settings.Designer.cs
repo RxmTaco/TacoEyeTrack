@@ -325,13 +325,25 @@ namespace TacoEyeTrack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool blinkMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int blinkMode {
             get {
-                return ((bool)(this["blinkMode"]));
+                return ((int)(this["blinkMode"]));
             }
             set {
                 this["blinkMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int lidL {
+            get {
+                return ((int)(this["lidL"]));
+            }
+            set {
+                this["lidL"] = value;
             }
         }
     }

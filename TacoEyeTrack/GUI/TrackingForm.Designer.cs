@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.urlL = new System.Windows.Forms.Label();
             this.urlR = new System.Windows.Forms.Label();
             this.btnload = new System.Windows.Forms.Button();
@@ -64,6 +65,10 @@
             this.blobMode = new System.Windows.Forms.CheckBox();
             this.smoothBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.lidSliderL = new AForge.Controls.SliderControl();
+            this.sliderControl1 = new AForge.Controls.SliderControl();
+            this.rotateTT = new System.Windows.Forms.ToolTip(this.components);
+            this.blinkTT = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -417,10 +422,11 @@
             this.rotateSliderL.NegativeAreaBrush = System.Drawing.Color.DarkGray;
             this.rotateSliderL.PositiveAreaBrush = System.Drawing.Color.DarkGray;
             this.rotateSliderL.ResetPositionOnMouseRelease = false;
-            this.rotateSliderL.Size = new System.Drawing.Size(22, 366);
+            this.rotateSliderL.Size = new System.Drawing.Size(22, 180);
             this.rotateSliderL.TabIndex = 32;
             this.rotateSliderL.Text = "Rotate Left Image";
             this.rotateSliderL.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RotateSliderL_MouseDown);
+            this.rotateSliderL.MouseEnter += new System.EventHandler(this.rotateSliderL_MouseEnter);
             this.rotateSliderL.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RotateSliderL_MouseUp);
             // 
             // rotateSliderR
@@ -434,10 +440,11 @@
             this.rotateSliderR.NegativeAreaBrush = System.Drawing.Color.DarkGray;
             this.rotateSliderR.PositiveAreaBrush = System.Drawing.Color.DarkGray;
             this.rotateSliderR.ResetPositionOnMouseRelease = false;
-            this.rotateSliderR.Size = new System.Drawing.Size(22, 366);
+            this.rotateSliderR.Size = new System.Drawing.Size(22, 180);
             this.rotateSliderR.TabIndex = 33;
             this.rotateSliderR.Text = "Rotate Right Image";
             this.rotateSliderR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RotateSliderR_MouseDown);
+            this.rotateSliderR.MouseEnter += new System.EventHandler(this.rotateSliderR_MouseEnter);
             this.rotateSliderR.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RotateSliderR_MouseUp);
             // 
             // pictureBox7
@@ -506,12 +513,52 @@
             this.label9.TabIndex = 38;
             this.label9.Text = "Smoothing Iterations\r\n(Lower = less smoothing and less delay)";
             // 
+            // lidSlider
+            // 
+            this.lidSliderL.IsHorizontal = false;
+            this.lidSliderL.Location = new System.Drawing.Point(385, 343);
+            this.lidSliderL.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lidSliderL.ManipulatorPosition = 0F;
+            this.lidSliderL.Name = "lidSlider";
+            this.lidSliderL.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.lidSliderL.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.lidSliderL.ResetPositionOnMouseRelease = false;
+            this.lidSliderL.Size = new System.Drawing.Size(22, 180);
+            this.lidSliderL.TabIndex = 39;
+            this.lidSliderL.Text = "Rotate Left Image";
+            this.lidSliderL.PositionChanged += new AForge.Controls.SliderControl.PositionChangedHandler(this.lidSlider_PositionChanged);
+            this.lidSliderL.MouseEnter += new System.EventHandler(this.lidSliderL_MouseEnter);
+            // 
+            // sliderControl1
+            // 
+            this.sliderControl1.IsHorizontal = false;
+            this.sliderControl1.Location = new System.Drawing.Point(786, 343);
+            this.sliderControl1.ManipulatorColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.sliderControl1.ManipulatorPosition = 0F;
+            this.sliderControl1.Name = "sliderControl1";
+            this.sliderControl1.NegativeAreaBrush = System.Drawing.Color.DarkGray;
+            this.sliderControl1.PositiveAreaBrush = System.Drawing.Color.DarkGray;
+            this.sliderControl1.ResetPositionOnMouseRelease = false;
+            this.sliderControl1.Size = new System.Drawing.Size(22, 180);
+            this.sliderControl1.TabIndex = 40;
+            this.sliderControl1.Text = "Rotate Left Image";
+            // 
+            // rotateTT
+            // 
+            this.rotateTT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            // 
+            // blinkTT
+            // 
+            this.blinkTT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            // 
             // TrackingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(820, 550);
+            this.Controls.Add(this.sliderControl1);
+            this.Controls.Add(this.lidSliderL);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.smoothBox);
             this.Controls.Add(this.blobMode);
@@ -603,5 +650,9 @@
         private System.Windows.Forms.CheckBox blobMode;
         private System.Windows.Forms.TextBox smoothBox;
         private System.Windows.Forms.Label label9;
+        private AForge.Controls.SliderControl lidSliderL;
+        private AForge.Controls.SliderControl sliderControl1;
+        private System.Windows.Forms.ToolTip rotateTT;
+        private System.Windows.Forms.ToolTip blinkTT;
     }
 }
