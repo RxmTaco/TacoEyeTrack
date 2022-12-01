@@ -97,6 +97,7 @@ namespace TacoEyeTrack
             sender.Connect();
         }
 
+        /*Blinking
         public void LidTracking(Bitmap bmp)
         {
             //initialize corner detection
@@ -119,7 +120,7 @@ namespace TacoEyeTrack
                 topLid = new PointF((float)corners.Average(p => p.X), (float)corners.Max(p => p.Y));
             }
             ratio = bottomLid.Y / topLid.Y;
-        }
+        }*/
 
         public void Smoothing(float lx, float ly, float rx, float ry)
         {
@@ -292,15 +293,16 @@ namespace TacoEyeTrack
             filter.ApplyInPlace(grayImage);
             */
 
-            //Lid Thresholding
+            /*Lid Thresholding
             int roundedLid = (Settings.Default.lidL);
             Threshold lidThreshold = new Threshold(roundedLid);
             Bitmap lidImage = lidThreshold.Apply(grayImage);
-
-            LidTracking(lidImage);
+            */
+            float lidRatio = Processing.Blink.GetLidRatio(grayImage, Settings.Default.lidL);
+            Console.WriteLine(lidRatio);
             //Taco taco = new Taco();
             //float lidRatio = taco.GetLidRatio(grayImage);
-            
+
             //Thresholding
             int rounded = (int)Math.Round((sliderL.ManipulatorPosition + 1) * 250, 0);
             Threshold threshold = new Threshold(rounded);
@@ -613,8 +615,11 @@ namespace TacoEyeTrack
             this.rotateSliderR.ManipulatorPosition = (float)((Settings.Default.rotationR / 180) - 1);
             this.rotateSliderL.ManipulatorPosition = (float)((Settings.Default.rotationL / 180) - 1);
             
-            this.blobMode.Checked = Settings.Default.blobMode;
+            this.lidSliderL.ManipulatorPosition = (((float)Settings.Default.lidL / 100) - 1);
 
+
+            this.blobMode.Checked = Settings.Default.blobMode;
+            
             this.smoothBox.Text = (Settings.Default.smoothingIterations - 1).ToString();
         }
 
