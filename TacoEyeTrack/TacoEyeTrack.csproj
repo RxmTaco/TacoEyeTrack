@@ -508,7 +508,7 @@
     <Compile Include="GUI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Processing\Blink.cs" />
+    <Compile Include="Processing\Eye.cs" />
     <Compile Include="Processing\Frame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
