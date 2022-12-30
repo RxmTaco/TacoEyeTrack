@@ -4,6 +4,8 @@ VR eye tracking application for VRChat using OSC inspired by [RedHawk989](https:
 
 ![eyetrack](https://user-images.githubusercontent.com/117571946/204283521-a67e8b5c-3bf1-4fd2-b751-bb9a62c91ae8.gif)
 
+![lid_test](https://user-images.githubusercontent.com/117571946/210032743-9c747257-0bb5-4b33-85b4-12d4a98af4f7.gif)
+
 
 # Install
 Download [latest version](https://github.com/RxmTaco/TacoTrack/releases), extract, launch "TacoEyeTrack.exe"
