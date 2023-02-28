@@ -16,6 +16,12 @@ Download [latest version](https://github.com/RxmTaco/TacoTrack/releases), extrac
 - Go to "Tracking" tab to start tracking.
 - In the "Tracking" tab, adjust the vertical Rotation sliders until the eyes are parallel, adjust Threshold slider so that the iris is visible and adjust the blob sliders to filter out potential unwanted blobs. Click on "Center" button to center the eyes.
 
+Optional settings:
+- Option to enable hull tracking which will detect the circumference of the iris, if disabled the program will average all detected values
+(keeping disabled may be better if there is a lot of noise in the camera feed, enabled will be more accurate)
+- Smoothing iterations, higher means more smoothing but more delay, 0 = off
+- Eyelid detection (in development)
+
 Parameters sent over OSC:
 - LeftEyeX      (float)
 - LeftEyeY      (float)
