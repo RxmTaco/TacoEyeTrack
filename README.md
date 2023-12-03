@@ -38,4 +38,4 @@ Float values range from -1 to 1 (this will be adjustable in a future update)
 
 Blink values can be either sent as an integer (1 or 0) or boolean (true or false) depending how your avatar is set up.
 
-***Still a work-in-progress, new features constantly rolling out!***
+***Still a work-in-progress***
